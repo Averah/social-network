@@ -13,6 +13,7 @@ const Profile = () => {
           <div>Post 1</div>
           <div>Post 2</div>
           <div>Post3</div>
+          <div>Post4</div>
         </div>
       </div>
     </div>
