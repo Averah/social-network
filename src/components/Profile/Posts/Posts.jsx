@@ -1,7 +1,11 @@
 import Post from "./Post/Post";
 import s from "./Posts.module.css";
 
-const Posts = () => {
+const MyPosts = (props) => {
+  let postsElements = props.profilePosts.map((p) => (
+    <Post message={p.message} likes={p.likes} />
+  ));
+
   return (
     <div className={s.postsBlock}>
       <h3>My Posts</h3>
@@ -13,13 +17,9 @@ const Posts = () => {
           <button>New post</button>
         </div>
       </div>
-      <div className={s.posts}>
-        <Post message="Hey, it is me" likes="10 likes" />
-        <Post message="It is my new post" likes="20 likes" />
-        <Post message="It is my second post" likes="5 likes" />
-      </div>
+      <div className={s.posts}>{postsElements}</div>
     </div>
   );
 };
 
-export default Posts;
+export default MyPosts;
