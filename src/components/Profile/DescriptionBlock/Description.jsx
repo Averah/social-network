@@ -1,6 +1,6 @@
 import s from "./Description.module.css";
 
-console.log("profile", s);
+
 
 const ProfileInfo = () => {
   return (

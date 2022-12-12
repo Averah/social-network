@@ -1,20 +1,19 @@
+import { useEffect } from "react";
+
 import ProfileInfo from "./DescriptionBlock/Description";
-import MyPosts from "./Posts/Posts";
+import MyPosts from "./Posts/MyPosts";
+
 import s from "./Profile.module.css";
 
-console.log("profile", s);
-
 const Profile = (props) => {
-  let posts = [
-    { id: 1, message: "Hey, it is me", likes: "10 likes" },
-    { id: 2, message: "It is my new post", likes: "15 likes" },
-    { id: 3, message: "It is my second post", likes: "20 likes" },
-  ];
-
   return (
     <div className={s.content}>
       <ProfileInfo />
-      <MyPosts profilePosts={posts} />
+      <MyPosts
+        posts={props.profilePage.posts}
+        newPostText={props.profilePage.newPostText}
+        dispatch={props.dispatch}
+      />
     </div>
   );
 };
