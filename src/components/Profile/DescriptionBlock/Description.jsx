@@ -8,7 +8,7 @@ const ProfileInfo = () => {
       <div>
         <img
           className={s.backgroundImage}
-          src="http://c.files.bbci.co.uk/13F56/production/_110005718_gettyimages-1162816285.jpg"
+          src="https://www.ucf.edu/files/2020/04/space-header-1600x550-1600x500.jpg"
           alt="backgroundImage"
         ></img>
 
