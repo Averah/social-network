@@ -33,6 +33,15 @@ let store = {
 
         },
 
+        // users: {
+        //     users: [
+        //         { id: 1, fullname: "Sasha", location: { country: 'Russia', city: 'Saint-Petersurg' }, status: 'Oh me oh my', followed: true },
+        //         { id: 2, fullname: "Dima", location: { country: 'Russia', city: 'Moscow' }, status: 'устал', followed: false },
+        //         { id: 3, fullname: "Chris", location: { country: 'USA', city: 'New-York' }, status: 'make my mental health great again', followed: false},
+        //         { id: 4, fullname: "Maya", location: { country: 'Russia', city: 'Tver' }, status: 'Переезжаю!!!', followed: true },
+        //     ]
+        // },
+
         sidebar: {
             friends: [
                 { id: 1, friend: 'Sasha' },
