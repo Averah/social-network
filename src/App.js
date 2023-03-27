@@ -1,7 +1,9 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
 import './App.css';
+import Counter from './components/Counter/Counter';
 import DialogsContainer from './components/Dialogs/DialogsContainer';
+import UsersContainer from './components/FindUsers/UsersContainer';
 import FindUsersContainer from './components/FindUsers/UsersContainer';
 import Friends from './components/Friends/Friends';
 import HeaderContainer from './components/Header/HeaderContainer';
@@ -29,8 +31,10 @@ const App = (props) => {
           <Friends />
         </Route>
         <Route path='/users'>
-          <FindUsersContainer />
-          
+          <UsersContainer/>
+        </Route>
+        <Route path='/counter'>
+          <Counter/>
         </Route>
       </div>
     </div>
