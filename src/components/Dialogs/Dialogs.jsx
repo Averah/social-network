@@ -1,8 +1,4 @@
 import React from "react";
-import {
-  addDialogsMessageActionCreator,
-  updateNewMessageTextActionCreator,
-} from "../../redux/dialogsReducer";
 import s from "./Dialogs.module.css";
 import DialogsItem from "./DialogsItem/DialogsItem";
 import Message from "./Message/Message";
@@ -23,7 +19,7 @@ const Dialogs = (props) => {
     let text = e.target.value;
     props.onMessageChange(text);
   };
-
+  
   return (
     <div className={s.dialogs}>
       <div className={s.dialogsItem}>{dialogsElements}</div>

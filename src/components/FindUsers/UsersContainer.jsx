@@ -3,28 +3,26 @@ import { connect } from "react-redux";
 import {
   follow,
   setCurrentPage,
-  setUsers,
   setTotalUsersCount,
-  toggleIsFetching,
   unfollow,
   toggleFollowingProgress,
-  getUsers
+  getUsers,
 } from "../../redux/usersReducer";
 
 import Users from "./Users";
 import Preloader from "../common/Preloader/Preloader";
-
+import { withAuthRedirect } from "../HOC/withAuthRedirect";
+import { compose } from "redux";
 
 class UsersContainer extends React.Component {
   componentDidMount() {
-    this.props.getUsers(this.props.currentPage, this.props.pageSize)
+    this.props.getUsers(this.props.currentPage, this.props.pageSize);
   }
-  
+
   onPageChanged = (pageNumber) => {
-    this.props.setCurrentPage(pageNumber)
-    this.props.getUsers(pageNumber, this.props.pageSize)
-    };
-  
+    this.props.setCurrentPage(pageNumber);
+    this.props.getUsers(pageNumber, this.props.pageSize);
+  };
 
   render() {
     return (
@@ -40,7 +38,7 @@ class UsersContainer extends React.Component {
           unfollow={this.props.unfollow}
           toggleFollowingProgress={this.props.toggleFollowingProgress}
           followingInProgress={this.props.followingInProgress}
-          // followingInProgress={this.props.followingInProgress}
+          
         />
       </>
     );
@@ -81,51 +79,23 @@ let mapStateToProps = (state) => {
 //     }
 // }
 
-export default connect(mapStateToProps, {
+// let AuthRedirectComponent = withAuthRedirect(UsersContainer)
+
+
+// export default connect(mapStateToProps, {
+//   follow,
+//   unfollow,
+//   setCurrentPage,
+//   setTotalUsersCount,
+//   toggleFollowingProgress,
+//   getUsers,
+// })(UsersContainer);
+
+export default compose (connect(mapStateToProps, {
   follow,
   unfollow,
   setCurrentPage,
   setTotalUsersCount,
   toggleFollowingProgress,
-  getUsers
-})(UsersContainer);
-
-
-// class Animal {
-//   constructor(name, type) {
-//     this.name = name;
-//     this.type = type;
-//   }
-// }
-
-// class Cat extends Animal {
-//   constructor(name, breed) {
-//     super(name, 'cat')
-//     this.breed = breed
-//   }
-
-//   sayMeow() {
-//     console.log('Meow my name is', this.name);
-//   }
-// }
-
-// const yuliasPet = new Cat('Asya')
-
-// yuliasPet.sayMeow()
-
-// let count = 0
-
-// console.log(count++); //0
-// console.log(count); //1
-
-
-function getCounter() {
-  let counter = 0;
-  return function() {
-    return counter++;
-  }
-}
-let count = getCounter();
-console.log(count());  // 0
-console.log(count());  // 1
-console.log(count());  // 2
+  getUsers,
+}))(UsersContainer)

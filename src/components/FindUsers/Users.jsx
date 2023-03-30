@@ -3,7 +3,6 @@ import { NavLink } from "react-router-dom";
 import defaultAvatar from "../../images/DefaultAvatar/defaultAvatar.png";
 import styles from "./Users.module.css";
 
-import { followAPI } from "../../API/followAPI";
 
 
 let Users = (props) => {
@@ -11,26 +10,27 @@ let Users = (props) => {
   for (let i = 1; i <= 10; i++) {
     pages.push(i);
   }
-  const follow = (id) => {
-    props.toggleFollowingProgress(true, id)
-    followAPI.followUser(id).then((data) => {
-      if (data.resultCode === 0) {
-        props.follow(id);
-      }
-      props.toggleFollowingProgress(false, id)
-    });
 
-  };
+  // const follow = (id) => {
+  //   props.toggleFollowingProgress(true, id)
+  //   followAPI.followUser(id).then((data) => {
+  //     if (data.resultCode === 0) {
+  //       props.follow(id);
+  //     }
+  //     props.toggleFollowingProgress(false, id)
+  //   });
 
-  const unfollow = (id) => {
-    props.toggleFollowingProgress(true, id)
-    followAPI.unfollowUser(id).then((data) => {
-      if (data.resultCode === 0) {
-        props.unfollow(id);
-      }
-      props.toggleFollowingProgress(false, id)
-    });
-  };
+  // };
+
+  // const unfollow = (id) => {
+  //   props.toggleFollowingProgress(true, id)
+  //   followAPI.unfollowUser(id).then((data) => {
+  //     if (data.resultCode === 0) {
+  //       props.unfollow(id);
+  //     }
+  //     props.toggleFollowingProgress(false, id)
+  //   });
+  // };
 
   return (
     <div>
@@ -65,7 +65,7 @@ let Users = (props) => {
                 <button
                   disabled={props.followingInProgress.some(id => id === u.id)}
                   onClick={() => {
-                    unfollow(u.id);
+                    props.unfollow(u.id);
                   }}
                 >
                   Unfollow
@@ -74,7 +74,7 @@ let Users = (props) => {
                 <button
                   disabled={props.followingInProgress.some(id => id === u.id)}
                   onClick={() => {
-                    follow(u.id);
+                    props.follow(u.id);
                   }}
                 >
                   Follow

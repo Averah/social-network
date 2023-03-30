@@ -1,7 +1,8 @@
+import { followAPI } from "../API/followAPI";
 import { getUsersAPI } from "../API/getUsersAPI";
 
-const FOLLOW = 'FOLLOW';
-const UNFOLLOW = 'UNFOLLOW';
+const FOLLOW_SUCCESS = 'FOLLOW';
+const UNFOLLOW_SUCCESS = 'UNFOLLOW_SUCCESS';
 const SET_USERS = 'SET_USERS';
 const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
 const SET_TOTAL_USERS_COUNT = 'SET_TOTAL_USERS_COUNT';
@@ -21,7 +22,7 @@ let initialState = {
 
 export const usersReducer = (state = initialState, action) => {
     switch (action.type) {
-        case FOLLOW:
+        case FOLLOW_SUCCESS:
             return {
                 ...state,
                 users: state.users.map(u => {
@@ -31,7 +32,7 @@ export const usersReducer = (state = initialState, action) => {
                     return u;
                 })
             }
-        case UNFOLLOW:
+        case UNFOLLOW_SUCCESS:
             return {
                 ...state,
                 users: state.users.map(u => {
@@ -78,9 +79,37 @@ export const getUsers = (currentPage, pageSize) => {
     }
 }
 
+export const follow = (id) => {
+    return (dispatch) => {
+        dispatch(toggleFollowingProgress(true, id))
+    followAPI.followUser(id).then((data) => {
+      if (data.resultCode === 0) {
+        dispatch(followSuccess(id));
+      }
+      dispatch(toggleFollowingProgress(false, id))
+    });
 
-export const follow = (userId) => ({ type: FOLLOW, userId })
-export const unfollow = (userId) => ({ type: UNFOLLOW, userId })
+  };
+}
+
+export const unfollow = (id) => {
+    return (dispatch) => {
+        dispatch(toggleFollowingProgress(true, id))
+    followAPI.unfollowUser(id).then((data) => {
+      if (data.resultCode === 0) {
+        dispatch(unfollowSuccess(id));
+      }
+      dispatch(toggleFollowingProgress(false, id))
+    });
+
+  };
+}
+
+
+
+
+export const followSuccess = (userId) => ({ type: FOLLOW_SUCCESS, userId })
+export const unfollowSuccess = (userId) => ({ type: UNFOLLOW_SUCCESS, userId })
 export const setUsers = (users) => ({ type: SET_USERS, users })
 export const setCurrentPage = (currentPage) => ({ type: SET_CURRENT_PAGE, currentPage })
 export const setTotalUsersCount = (totalUsersCount) => ({ type: SET_TOTAL_USERS_COUNT, count: totalUsersCount })

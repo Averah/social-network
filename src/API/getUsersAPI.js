@@ -6,8 +6,4 @@ export const getUsersAPI = (currentPage, pageSize) => {
     .then((response) => response.data);
 };
 
-// export const getUsersByPage= (pageNumber, pageSize) => {
-//     return axiosInstance.get(`users?page=${pageNumber}&count=${pageSize}`)
-//     .then (response => response.data)
 
-// }

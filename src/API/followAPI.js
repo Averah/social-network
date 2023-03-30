@@ -2,13 +2,13 @@
 import { axiosInstance } from "./axiosInstance";
 
 export const followAPI = {
-  followUser: (id) => {
+  followUser(id) {
     return axiosInstance
       .post(`follow/${id}`, {})
       .then((response) => response.data);
   },
 
-  unfollowUser: (id) => {
+  unfollowUser(id) {
     return axiosInstance
       .delete(`follow/${id}`, {})
       .then((response) => response.data);
