@@ -11,8 +11,6 @@ let initialState = {
         { id: 1, message: "Hey, it is me", likes: "10 likes" },
         { id: 2, message: "It is my new post", likes: "15 likes" },
         { id: 3, message: "It is my second post", likes: "20 likes" },],
-
-    newPostText: '',
     profile: null,
     status: ''
 }
@@ -22,13 +20,13 @@ export const profileReducer = (state = initialState, action) => {
         case ADD_POST: {
             let newPost = {
                 id: 4,
-                message: state.newPostText,
+                message: action.postText,
                 likes: '0'
             }
             let stateCopy = { ...state }
             stateCopy.posts = [...state.posts]
             stateCopy.posts.push(newPost)
-            stateCopy.newPostText = ''
+
             return stateCopy
         }
         case UPDATE_NEW_POST_TEXT: {
@@ -69,7 +67,7 @@ export const getUsersStatus = (userId) => {
     }
 }
 
-export const updateUsersStatus = (status, userId) => {
+export const updateUsersStatus = (status) => {
     return (dispatch) => {
         profileAPI.updateStatus(status)
         .then(response => {
@@ -80,7 +78,7 @@ export const updateUsersStatus = (status, userId) => {
 }
 
 
-export const addPostActionCreator = () => ({ type: ADD_POST })
+export const addPostActionCreator = (data) => ({ type: ADD_POST, postText: data.postText })
 export const updateNewPostTextActionCreator = (text) =>
     ({ type: UPDATE_NEW_POST_TEXT, newText: text })
 export const setUserProfile = (profile) => ({ type: SET_USER_PROFILE, profile })

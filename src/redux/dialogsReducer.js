@@ -16,7 +16,7 @@ let initialState = {
         { id: 2, message: "Its me" },
         { id: 3, message: "How is your day" },
     ],
-    newMessageText: '',
+    
 
 
 }
@@ -26,11 +26,10 @@ export const dialogsReducer = (state = initialState, action) => {
         case ADD_DIALOGS_MESSAGE: {
             let newDialogMessage = {
                 id: 4,
-                message: state.newMessageText,
+                message: action.dialogsMessage,
             }
             return {
                 ...state,
-                newMessageText: '',
                 messages: [...state.messages, newDialogMessage],
 
             }
@@ -49,5 +48,5 @@ export const dialogsReducer = (state = initialState, action) => {
 }
 
 
-export const addDialogsMessageActionCreator = () => ({ type: ADD_DIALOGS_MESSAGE })
+export const addDialogsMessageActionCreator = (data) => ({ type: ADD_DIALOGS_MESSAGE, dialogsMessage: data.dialogsMessage})
 export const updateNewMessageTextActionCreator = (text) => ({ type: UPDATE_NEW_MESSAGE_TEXT, messageText: text })

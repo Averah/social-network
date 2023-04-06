@@ -6,11 +6,9 @@ import DialogsContainer from './components/Dialogs/DialogsContainer';
 import UsersContainer from './components/FindUsers/UsersContainer';
 import Friends from './components/Friends/Friends';
 import HeaderContainer from './components/Header/HeaderContainer';
-import Login from './components/Login/Login';
-
+import LoginPage from './components/Login/LoginPage';
 import NavbarContainer from './components/Navbar/NavbarContainer';
-
-import ProfileContainer from './components/Profile/ProfileContainer';
+import ProfileContainerWithHooks from './components/Profile/ProfileContainerWithHooks';
 // import { addPost, updateNewPostText } from './redux/state';
 
 
@@ -22,7 +20,7 @@ const App = (props) => {
       <NavbarContainer />
       <div className='app-wrapper-content'>
         <Route path='/profile/:userId?'>
-          <ProfileContainer />
+          <ProfileContainerWithHooks />
         </Route>
         <Route path='/dialogs'>
           <DialogsContainer />
@@ -37,7 +35,7 @@ const App = (props) => {
           <Counter/>
         </Route>
         <Route path='/login'>
-          <Login/>
+          <LoginPage/>
         </Route>
         
       </div>

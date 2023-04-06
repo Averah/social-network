@@ -14,5 +14,26 @@
 }
 
 .loginBlock a {
-  color: white;
+  color: #e6eaeb;
+  text-decoration: none;
+  transition-duration: 0.4s;
+  padding: 10px;
+}
+
+.loginBlock a:hover {
+  color: #a8dce9;
+}
+
+.loginBlock button {
+  color: #e6eaeb;
+  background-color: transparent;
+  border: none;
+  font-weight: bold;
+  transition-duration: 0.4s;
+  
+}
+
+.loginBlock button:hover {
+  /* background-color: */
+  color: #a8dce9
 }

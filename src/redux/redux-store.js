@@ -14,7 +14,9 @@ let reducers = combineReducers({
     sidebar: sidebarReducer,
     usersPage: usersReducer,
     auth: authReducer,
-    counter: counterReducer
+    counter: counterReducer,
+    
+    
 })
 
 let store = createStore(reducers, applyMiddleware(thunk))
