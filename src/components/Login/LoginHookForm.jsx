@@ -1,6 +1,6 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { signIn } from "../../redux/authReducer";
 
 const LoginForm = () => {
@@ -15,6 +15,8 @@ const LoginForm = () => {
   const onSubmit = (data) => {
     dispatch(signIn(data));
   };
+  const error = useSelector(state => state.auth.errorMessages)
+ 
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -51,6 +53,9 @@ const LoginForm = () => {
               {errors?.password?.message || "Error!"}
             </p>
           )}
+        </div>
+        <div>
+            <p style={{ color: "red" }}>{error?.join()}</p>
         </div>
       </div>
       <div>

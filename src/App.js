@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect} from 'react';
+import { useDispatch } from "react-redux";
 import { Route } from 'react-router-dom';
 import './App.css';
 import Counter from './components/Counter/Counter';
@@ -9,11 +10,18 @@ import HeaderContainer from './components/Header/HeaderContainer';
 import LoginPage from './components/Login/LoginPage';
 import NavbarContainer from './components/Navbar/NavbarContainer';
 import ProfileContainerWithHooks from './components/Profile/ProfileContainerWithHooks';
-// import { addPost, updateNewPostText } from './redux/state';
+import { initialization } from './redux/appReducer';
+
 
 
 
 const App = (props) => {
+
+  const dispatch = useDispatch()
+ 
+  useEffect(() => {
+    dispatch(initialization())
+  })
   return (
     <div className='app-wrapper'>
       <HeaderContainer/>
