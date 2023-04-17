@@ -1,5 +1,5 @@
-const ADD_DIALOGS_MESSAGE = 'ADD-DIALOGS-MESSAGE'
-const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT'
+const ADD_DIALOGS_MESSAGE = 'social-network/dialogs/ADD-DIALOGS-MESSAGE'
+const UPDATE_NEW_MESSAGE_TEXT = 'social-network/dialogs/UPDATE-NEW-MESSAGE-TEXT'
 
 let initialState = {
 
@@ -16,7 +16,7 @@ let initialState = {
         { id: 2, message: "Its me" },
         { id: 3, message: "How is your day" },
     ],
-    
+
 
 
 }
@@ -48,5 +48,5 @@ export const dialogsReducer = (state = initialState, action) => {
 }
 
 
-export const addDialogsMessageActionCreator = (data) => ({ type: ADD_DIALOGS_MESSAGE, dialogsMessage: data.dialogsMessage})
+export const addDialogsMessageActionCreator = (dialogsMessage) => ({ type: ADD_DIALOGS_MESSAGE, dialogsMessage })
 export const updateNewMessageTextActionCreator = (text) => ({ type: UPDATE_NEW_MESSAGE_TEXT, messageText: text })

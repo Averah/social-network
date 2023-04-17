@@ -1,7 +1,8 @@
-import React, { useEffect} from 'react';
-import { useDispatch } from "react-redux";
-import { Route } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector, Provider } from "react-redux";
+import { Route, BrowserRouter } from 'react-router-dom';
 import './App.css';
+import Preloader from './components/common/Preloader/Preloader';
 import Counter from './components/Counter/Counter';
 import DialogsContainer from './components/Dialogs/DialogsContainer';
 import UsersContainer from './components/FindUsers/UsersContainer';
@@ -11,6 +12,8 @@ import LoginPage from './components/Login/LoginPage';
 import NavbarContainer from './components/Navbar/NavbarContainer';
 import ProfileContainerWithHooks from './components/Profile/ProfileContainerWithHooks';
 import { initialization } from './redux/appReducer';
+import store from './redux/redux-store';
+
 
 
 
@@ -18,13 +21,18 @@ import { initialization } from './redux/appReducer';
 const App = (props) => {
 
   const dispatch = useDispatch()
- 
+  const isAppInitialized = useSelector(state => state.app.initialized)
+
   useEffect(() => {
     dispatch(initialization())
-  })
+  }, [])
+
+  if (!isAppInitialized) {
+    return <Preloader />
+  }
   return (
     <div className='app-wrapper'>
-      <HeaderContainer/>
+      <HeaderContainer />
       <NavbarContainer />
       <div className='app-wrapper-content'>
         <Route path='/profile/:userId?'>
@@ -37,19 +45,26 @@ const App = (props) => {
           <Friends />
         </Route>
         <Route path='/users'>
-          <UsersContainer/>
+          <UsersContainer />
         </Route>
         <Route path='/counter'>
-          <Counter/>
+          <Counter />
         </Route>
         <Route path='/login'>
-          <LoginPage/>
+          <LoginPage />
         </Route>
-        
+
       </div>
     </div>
   );
 }
 
+const SocialNetworkApp = (props) => {
+  return <BrowserRouter>
+    <Provider store={store}>
+      <App />
+    </Provider>
+  </BrowserRouter>
+}
 
-export default App;
+export default SocialNetworkApp;

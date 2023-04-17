@@ -10,12 +10,12 @@ const AddPostForm = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({ mode: "onChange" });
+  } = useForm({ mode: "onBlur" });
 
   const dispatch = useDispatch();
 
   const onSubmit = (data) => {
-    dispatch(addPostActionCreator(data));
+    dispatch(addPostActionCreator(data.postText));
     reset();
   };
 

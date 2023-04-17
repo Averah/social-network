@@ -3,7 +3,7 @@ import Post from "./Post/Post";
 import s from "./MyPosts.module.css";
 import AddPostForm from "./AddPostForm";
 
-const MyPosts = (props) => {
+const MyPosts = React.memo(props => {
   let postsElements = props.profilePage.posts.map((p) => (
     <Post message={p.message} likes={p.likes} />
   ));
@@ -14,6 +14,6 @@ const MyPosts = (props) => {
       <div className={s.posts}>{postsElements}</div>
     </div>
   );
-};
+});
 
 export default MyPosts;

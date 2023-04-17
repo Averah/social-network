@@ -3,9 +3,9 @@ import { authCaptchaAPI } from "../API/authCaptchaAPI";
 import { loginAPI } from "../API/loginAPI";
 import { logOutAPI } from "../API/logOutAPI";
 
-const SET_USER_DATA = 'SET_USER_DATA'
-const SET_LOGIN_DATA = 'SET_LOGIN_DATA'
-const SET_ERROR_MESSAGE = 'SET_ERROR_MESSAGE'
+const SET_USER_DATA = 'social-network/auth/SET_USER_DATA'
+const SET_LOGIN_DATA = 'social-network/auth/SET_LOGIN_DATA'
+const SET_ERROR_MESSAGE = 'social-network/auth/SET_ERROR_MESSAGE'
 
 let initialState = {
     userId: null,
@@ -21,59 +21,51 @@ export const authReducer = (state = initialState, action) => {
             return {
                 ...state,
                 ...action.data,
-                isAuth: true
             }
         case SET_LOGIN_DATA:
             return {
                 ...state,
-                ...action.data,
+                userId: action.userId,
                 isAuth: true
             }
         case SET_ERROR_MESSAGE:
             return {
                 ...state,
-                errorMessages:action.errorMessages
+                errorMessages: action.errorMessages
             }
         default:
             return state;
     }
 }
 
-export const authorization = () => {
-    
-    return (dispatch) => {
-        return authAPI().then((response) => {
-            if (response.data.resultCode === 0) {
-                let { id, email, login } = response.data.data;
-                console.log(response.data);
-                dispatch(setAuthUserData(id, email, login));
-            }
-        });
+export const authorization = () => async (dispatch) => {
+    let response = await authAPI()
+    if (response.data.resultCode === 0) {
+        let { id, email, login } = response.data.data;
+        dispatch(setAuthUserData(id, email, login, true));
     }
+    ;
 }
-export const signIn = (data) => {
-    return (dispatch) => {
-        loginAPI(data).then((response) => {
-            if (response.data.resultCode === 0) {
-                let { id, email, login } = response.data.data;
-                dispatch(setAuthUserData(id, email, login))
-                dispatch(setErrorMessage(null))
-            } else  {
-                let message = response.data.messages 
-                dispatch(setErrorMessage(message))   
-            }
-        })
+
+export const signIn = (data) => async (dispatch) => {
+    let response = await loginAPI(data)
+    if (response.data.resultCode === 0) {
+        let userId = response.data.data.userId;
+        dispatch(setLoginData(userId))
+        dispatch(setErrorMessage(null))
+    } else {
+        let message = response.data.messages
+        dispatch(setErrorMessage(message))
     }
 }
 
-export const logOut = () => {
-    return (dispatch) => {
-        logOutAPI().then((response) => {
-            if (response.data.resultCode === 0) {
-                dispatch(setAuthUserData(null, null, null, false))
-            }
-        })
+
+export const logOut = () => async (dispatch) => {
+    let response = await logOutAPI()
+    if (response.data.resultCode === 0) {
+        dispatch(setAuthUserData(null, null, null, false))
     }
+
 }
 
 export const getCaptcha = () => {
@@ -87,9 +79,9 @@ export const getCaptcha = () => {
 
 
 
-export const setAuthUserData = (userId, email, login) => ({ type: SET_USER_DATA, data: { userId, email, login} })
-export const setLoginData = (email, password, rememberMe) => ({ type: SET_LOGIN_DATA, data: { email, password, rememberMe } })
-export const setErrorMessage = (message) => ({type: SET_ERROR_MESSAGE, errorMessages: message})
+export const setAuthUserData = (userId, email, login, isAuth) => ({ type: SET_USER_DATA, data: { userId, email, login, isAuth } })
+export const setLoginData = (userId) => ({ type: SET_LOGIN_DATA, userId })
+export const setErrorMessage = (message) => ({ type: SET_ERROR_MESSAGE, errorMessages: message })
 
 
 

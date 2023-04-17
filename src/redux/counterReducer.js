@@ -1,6 +1,6 @@
 
-const ADD_NUMBER = 'ADD_NUMBER'
-const SUBTRACT_NUMBER = 'SUBTRACT_NUMBER'
+const ADD_NUMBER = 'social-network/counter/ADD_NUMBER'
+const SUBTRACT_NUMBER = 'social-network/counter/SUBTRACT_NUMBER'
 
 
 let initialState = {

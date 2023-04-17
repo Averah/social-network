@@ -12,15 +12,18 @@ import { compose } from "redux";
 
 export const ProfileContainerWithHooks = (props) => {
   useEffect(() => {
-    
     let userId = props.match.params.userId;
     if (!userId) {
       userId = props.authorizedUserId;
     }
-    console.log(userId);
     props.getUsersProfile(userId);
     props.getUsersStatus(userId);
-  }, [props.match.params.userId, props.getUsersProfile, props.getUsersStatus, props.authorizedUserId]);
+  }, [
+    props.match.params.userId,
+    props.getUsersProfile,
+    props.getUsersStatus,
+    props.authorizedUserId,
+  ]);
 
   return (
     <Profile
@@ -37,7 +40,7 @@ let mapStateToProps = (state) => {
     profile: state.profilePage.profile,
     status: state.profilePage.status,
     authorizedUserId: state.auth.userId,
-    isAuth: state.auth.isAuth
+    isAuth: state.auth.isAuth,
   };
 };
 
