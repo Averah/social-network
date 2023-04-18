@@ -1,23 +1,18 @@
 import React, { Suspense, useEffect } from 'react';
 import { useDispatch, useSelector, Provider } from "react-redux";
-import { Route, BrowserRouter } from 'react-router-dom';
+import { Route, HashRouter } from 'react-router-dom';
 import './App.css';
 import Preloader from './components/common/Preloader/Preloader';
 import Counter from './components/Counter/Counter';
-// import DialogsContainer from './components/Dialogs/DialogsContainer';
 import UsersContainer from './components/FindUsers/UsersContainer';
 import Friends from './components/Friends/Friends';
 import HeaderContainer from './components/Header/HeaderContainer';
 import LoginPage from './components/Login/LoginPage';
 import NavbarContainer from './components/Navbar/NavbarContainer';
-// import ProfileContainerWithHooks from './components/Profile/ProfileContainerWithHooks';
 import { initialization } from './redux/appReducer';
 import store from './redux/redux-store';
 const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'));
 const ProfileContainerWithHooks = React.lazy(() => import('./components/Profile/ProfileContainerWithHooks'));
-
-
-
 
 
 const App = (props) => {
@@ -37,25 +32,25 @@ const App = (props) => {
       <HeaderContainer />
       <NavbarContainer />
       <div className='app-wrapper-content'>
-      <Suspense fallback={<Preloader />}>
-        <Route path='/profile/:userId?'>
-          <ProfileContainerWithHooks />
-        </Route>
-        <Route path='/dialogs'>
-          <DialogsContainer />
-        </Route>
-        <Route path='/friends'>
-          <Friends />
-        </Route>
-        <Route path='/users'>
-          <UsersContainer />
-        </Route>
-        <Route path='/counter'>
-          <Counter />
-        </Route>
-        <Route path='/login'>
-          <LoginPage />
-        </Route>
+        <Suspense fallback={<Preloader />}>
+          <Route path='/profile/:userId?'>
+            <ProfileContainerWithHooks />
+          </Route>
+          <Route path='/dialogs'>
+            <DialogsContainer />
+          </Route>
+          <Route path='/friends'>
+            <Friends />
+          </Route>
+          <Route path='/users'>
+            <UsersContainer />
+          </Route>
+          <Route path='/counter'>
+            <Counter />
+          </Route>
+          <Route path='/login'>
+            <LoginPage />
+          </Route>
         </Suspense>
 
       </div>
@@ -64,11 +59,11 @@ const App = (props) => {
 }
 
 const SocialNetworkApp = (props) => {
-  return <BrowserRouter>
+  return <HashRouter>
     <Provider store={store}>
       <App />
     </Provider>
-  </BrowserRouter>
+  </HashRouter>
 }
 
 export default SocialNetworkApp;

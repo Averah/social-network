@@ -10,7 +10,8 @@
 
 .loginBlock {
   float: right;
-  color: white
+  color: white;
+
 }
 
 .loginBlock a {
@@ -22,6 +23,7 @@
 
 .loginBlock a:hover {
   color: #a8dce9;
+  
 }
 
 .loginBlock button {
@@ -30,6 +32,7 @@
   border: none;
   font-weight: bold;
   transition-duration: 0.4s;
+  cursor: pointer
   
 }
 

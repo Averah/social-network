@@ -6,3 +6,22 @@
 .descriptionBlock {
   padding: 10px;
 }
+
+.userAvatar {
+  max-width: 200px;
+}
+.uploadAvatar {
+    cursor: pointer;
+    transition-duration: 0.4s;
+    font-weight: lighter;
+    opacity: .6;
+}
+
+.uploadAvatar:hover {
+  /* background-color: */
+  color: #05c5c5
+}
+
+.userStatus {
+  margin-top: 10px;
+}

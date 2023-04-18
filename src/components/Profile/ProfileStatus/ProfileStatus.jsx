@@ -50,7 +50,7 @@ export class ProfileStatus extends React.Component {
         ) : (
           <div>
             <span onDoubleClick={this.activateEditMode}>
-              {this.props.status || 'Your status'}
+              {this.props.status || 'Status'}
             </span>
           </div>
         )}
