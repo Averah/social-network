@@ -1,27 +1,42 @@
-.backgroundImage {
-  width: 100%;
-  
-}
 
 .descriptionBlock {
+  display: flex;
   padding: 10px;
 }
 
-.userAvatar {
-  max-width: 200px;
+.userAvatar img{
+  max-width: 250px;
+  padding-right: 50px;
 }
 .uploadAvatar {
-    cursor: pointer;
     transition-duration: 0.4s;
     font-weight: lighter;
     opacity: .6;
+    /* text-align: center; */
+}
+
+.uploadAvatar label {
+  cursor: pointer;
 }
 
 .uploadAvatar:hover {
-  /* background-color: */
   color: #05c5c5
 }
 
+.userData {
+  padding-left: 50px;
+  border-left: 1px solid
+}
+
 .userStatus {
-  margin-top: 10px;
+  padding-top: 5px;
+  /* text-align: center; */
+}
+
+.contacts {
+  padding-top: 10px;
+}
+
+.editingProfileData {
+  padding-left: 50px;
 }
