@@ -1,85 +1,97 @@
-import React, { useEffect, useMemo } from "react";
+import React from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import { saveProfile, saveProfileSuccess } from "../../../redux/profileReducer";
+import { saveProfile } from "../../../redux/profileReducer";
 import s from "./ProfileInfo.module.css";
 
 const ProfileDataForm = (props) => {
   const {
     register,
     handleSubmit,
-    reset,
-    formState: { errors },
-  } = useForm({ mode: "onBlur", defaultValues: props.profile});
+  } = useForm({ mode: "onBlur", defaultValues: props.profile });
 
   const dispatch = useDispatch();
-  // useEffect(() => {
-  //   reset(props.profile);
-  // }, [props.profile]);
 
-  const onSubmit = (data) => {
-    console.log(data);
-    const deactivateEditMode = props.deactivateEditMode
-    dispatch(saveProfile(data))
-    deactivateEditMode()
-    
+  const onSubmit = async (data) => {
+    const serverResponseMessage = await dispatch(saveProfile(data));
 
+    if (serverResponseMessage === "success") {
+      props.deactivateEditMode();
+    }
   };
-  const error = useSelector((state) => state.auth.errorMessages);
+  const error = useSelector((state) => state.profilePage.errorMessages);
+
+  const cancelChanges = () => {
+    const deactivateEditMode = props.deactivateEditMode;
+    deactivateEditMode();
+  };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit(onSubmit)} className={s.userData}>
       <div>
-      <b><label for="fullName">Full Name:</label></b>
+        <b>
+          <label for="fullName">Full Name:</label>
+        </b>
         <input
-        id='fullName'
+          id="fullName"
           type="text"
           name="fullName"
-          onBlur
-          {...register("fullName", {
-            required: "Please enter name",
-          })}
+          {...register("fullName")}
         />
-        {/* <div>
-          {errors?.email && (
-            <p style={{ color: "red" }}>{errors.email?.message || "Error!"}</p>
-          )}
-        </div> */}
       </div>
       <div>
-      <b><label for="aboutMe">About me:</label></b>
-        <input type="text" id='aboutMe' name="aboutMe" {...register("aboutMe")}/>
-        {/* <div>
-          {errors?.password && (
-            <p style={{ color: "red" }}>
-              {errors?.password?.message || "Error!"}
-            </p>
-          )}
-        </div> */}
-        <div>
-          <p style={{ color: "red" }}>{error?.join()}</p>
-        </div>
+        <b>
+          <label for="aboutMe">About me:</label>
+        </b>
+        <input
+          type="text"
+          id="aboutMe"
+          name="aboutMe"
+          {...register("aboutMe")}
+        />
       </div>
       <div className={s.checkbox}>
         <b>Looking for a job:</b>
-        <input type="checkbox" id="lookingForAJob" name="checkbox" {...register("lookingForAJob")}/>
+        <input
+          type="checkbox"
+          id="lookingForAJob"
+          name="checkbox"
+          {...register("lookingForAJob")}
+        />
         <label for="true"></label>
       </div>
       <div>
-      <b><label for="lookingForAJobDescription">My professional skills:</label></b>
+        <b>
+          <label for="lookingForAJobDescription">My professional skills:</label>
+        </b>
         <input
           type="textarea"
           name="lookingForAJobDescription"
-          id='lookingForAJobDescription'
+          id="lookingForAJobDescription"
           {...register("lookingForAJobDescription")}
         />
       </div>
-       {Object.entries(props.profile.contacts).map(([key, value]) => 
-          <div className={s.contact}>
-            <b><label for='contact'>{key}</label></b>
-            <input type='text' name={`contacts.${key}`} {...register(`contacts.${key}`)} />
-          </div>)}
+      {Object.entries(props.profile.contacts).map(([key]) => (
+        <div className={s.contact}>
+          <b>
+            <label for="contact">{key}</label>
+          </b>
+          <input
+            type="text"
+            name={`contacts.${key}`}
+            {...register(`contacts.${key}`)}
+          />
+        </div>
+      ))}
+      <div>
+          {error && <p style={{ color: "red" }}>{error.join(', ') || "Error!"}</p>}
+        </div>
       <button type="submit">Save changes</button>
+      <span>
+        <button type="button" onClick={cancelChanges}>
+          Cancel changes
+        </button>
+      </span>
     </form>
   );
 };

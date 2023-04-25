@@ -3,25 +3,37 @@
   display: flex;
   padding: 10px;
 }
+.descriptionBlock button {
+  background-color: transparent;
+  cursor: pointer;
+  transition-duration: 0.4s;
+  font-weight: lighter;
+  opacity: .6;
+  margin-top: 10px;
+  border-width: thin;
+}
+
+.descriptionBlock button:hover {
+  color: #05c5c5
+}
 
 .userAvatar img{
   max-width: 250px;
   padding-right: 50px;
 }
-.uploadAvatar {
-    transition-duration: 0.4s;
-    font-weight: lighter;
-    opacity: .6;
-    /* text-align: center; */
-}
 
 .uploadAvatar label {
-  cursor: pointer;
+  margin-left: 60px;
+  transition-duration: 0.4s;
+    font-weight: lighter;
+    opacity: .6;
 }
 
-.uploadAvatar:hover {
+.uploadAvatar label:hover{
+  cursor: pointer;
   color: #05c5c5
 }
+
 
 .userData {
   padding-left: 50px;
@@ -30,7 +42,7 @@
 
 .userStatus {
   padding-top: 5px;
-  /* text-align: center; */
+
 }
 
 .contacts {

@@ -7,6 +7,7 @@ const SET_USER_STATUS = 'social-network/profile/SET-USER-STATUS'
 const DELETE_POST = 'social-network/profile/DELETE_POST'
 const SAVE_PHOTO_SUCCESS = 'social-network/profile/SAVE_PHOTO_SUCCESS'
 const SAVE_PROFILE_SUCCESS = 'social-network/profile/SAVE_PROFILE_SUCCESS'
+const SHOW_ERROR_MESSAGE = 'social-network/profile/SHOW_ERROR_MESSAGE'
 
 let initialState = {
     posts: [
@@ -14,7 +15,8 @@ let initialState = {
         { id: 2, message: "It is my new post", likes: "15 likes" },
         { id: 3, message: "It is my second post", likes: "20 likes" },],
     profile: null,
-    status: ''
+    status: '',
+    errorMessages: ''
 }
 
 export const profileReducer = (state = initialState, action) => {
@@ -54,6 +56,9 @@ export const profileReducer = (state = initialState, action) => {
         case SAVE_PROFILE_SUCCESS: {
             return { ...state, profile: action.profile }
         }
+        case SHOW_ERROR_MESSAGE: {
+            return {...state, errorMessages: action.errorMessages}
+        }
 
         default:
             return state
@@ -89,6 +94,11 @@ export const saveProfile = (profile) => async (dispatch, getState) => {
     let response = await profileAPI.saveProfile(profile)
     if (response.data.resultCode === 0) {
         dispatch(getUsersProfile(userId))
+        dispatch(showErrorMessages(null))
+        return 'success'
+    } else {
+        dispatch(showErrorMessages(response.data.messages))
+        return response.data.messages[0]
     }
 }
 
@@ -101,3 +111,4 @@ export const setUserStatus = (status) => ({ type: SET_USER_STATUS, status })
 export const deletePost = (postId) => ({ type: DELETE_POST, postId })
 export const savePhotoSuccess = (photos) => ({ type: SAVE_PHOTO_SUCCESS, photos })
 export const saveProfileSuccess = (profile) => ({ type: SAVE_PROFILE_SUCCESS, profile })
+export const showErrorMessages = (errorMessages) => ({type: SHOW_ERROR_MESSAGE, errorMessages})

@@ -1,31 +1,29 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
 const ProfileStatusWithHooks = (props) => {
+  let [editMode, setEditMode] = useState(false);
+  let [status, setStatus] = useState(props.status);
 
-  let [editMode, setEditMode] = useState(false)
-  let [status, setStatus] = useState(props.status)
-
-  useEffect (() => {
-    setStatus(props.status)
-  }, [props.status])
-
+  useEffect(() => {
+    setStatus(props.status);
+  }, [props.status]);
 
   const activateEditMode = () => {
-    setEditMode(true)
-    
-  }
+    if (props.isOwner) {
+      setEditMode(true);
+    }
+  };
 
   const deactivateEditMode = () => {
-    setEditMode(false)
-    props.updateUsersStatus(status)
-  }
+    setEditMode(false);
+    props.updateUsersStatus(status);
+  };
 
   const onStatusChange = (e) => {
-    setStatus(e.currentTarget.value)
-  }
+    setStatus(e.currentTarget.value);
+  };
 
-
-  return editMode ? (
+  return props.isOwner && editMode ? (
     <div>
       <input
         onChange={onStatusChange}
@@ -35,9 +33,11 @@ const ProfileStatusWithHooks = (props) => {
       />
     </div>
   ) : (
-      <div>
-        <span onClick={activateEditMode}><b>Status:</b> {props.status || "Your status"}</span>
-      </div>
+    <div>
+      <span onClick={activateEditMode}>
+        <b>Status:</b> {props.status || ""}
+      </span>
+    </div>
   );
 };
 
