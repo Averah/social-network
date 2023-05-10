@@ -15,8 +15,8 @@ const LoginForm = () => {
   const onSubmit = (data) => {
     dispatch(signIn(data));
   };
-  const error = useSelector(state => state.auth.errorMessages)
- 
+  const error = useSelector((state) => state.auth.errorMessages);
+  const captchaURL = useSelector((state) => state.auth.captchaURL);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -47,16 +47,6 @@ const LoginForm = () => {
           name="password"
           {...register("password", { required: "Password is required" })}
         />
-        <div>
-          {errors?.password && (
-            <p style={{ color: "red" }}>
-              {errors?.password?.message || "Error!"}
-            </p>
-          )}
-        </div>
-        <div>
-            <p style={{ color: "red" }}>{error?.join()}</p>
-        </div>
       </div>
       <div>
         <input
@@ -67,6 +57,15 @@ const LoginForm = () => {
         ></input>
         <label for="rememberMe">Remember me</label>
       </div>
+      <div>
+        <p style={{ color: "red" }}>{error?.join()}</p>
+      </div>
+      {captchaURL && (
+        <div>
+          <img src={captchaURL} alt="captcha" />
+        </div>
+      )}
+      {captchaURL && <div><input name='captcha' type='text' {...register("captcha")}></input></div>}
       <button type="submit">Login</button>
     </form>
   );

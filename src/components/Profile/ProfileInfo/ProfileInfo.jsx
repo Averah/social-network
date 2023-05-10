@@ -18,6 +18,11 @@ const ProfileInfo = (props) => {
       props.savePhoto(e.target.files[0]);
     }
   };
+
+  const activateEditMode= () => {
+     setIsEditMode(true)}
+  const deactivateEditMode= () => {
+      setIsEditMode(false)}
  
   return (
     <div className={s.descriptionBlock}>
@@ -50,9 +55,9 @@ const ProfileInfo = (props) => {
           />
         </div>
       </div>
-      {isEditMode ? <ProfileDataForm  profile={props.profile} deactivateEditMode={() => setIsEditMode(false)}/> : <ProfileData profile={props.profile} 
+      {isEditMode ? <ProfileDataForm  profile={props.profile} deactivateEditMode={deactivateEditMode}/> : <ProfileData profile={props.profile} 
       isOwner={props.isOwner}
-      activateEditMode={() => setIsEditMode(true)} />}
+      activateEditMode={activateEditMode} />}
     </div>
   );
 };

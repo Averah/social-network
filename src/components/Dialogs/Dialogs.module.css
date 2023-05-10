@@ -1,11 +1,8 @@
 .dialogs {
-    display: grid;
-    grid-template-columns: 2fr 10fr;
+    display: flex;
     padding: 10px;
+
 }
-
-
-
 
 .dialogsItem a {
     text-decoration: none;
@@ -14,4 +11,15 @@
 .newMessage {
     padding-top: 200px;
     
+}
+.messages {
+    display: flex;
+    flex-direction:column;
+    margin-left: 100px;
+    
+}
+
+.message {
+
+    flex: 1 1 auto
 }

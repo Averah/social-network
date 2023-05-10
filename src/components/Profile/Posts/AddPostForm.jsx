@@ -22,16 +22,17 @@ const AddPostForm = () => {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div>
-      <CustomTextarea
+        <CustomTextarea
           name="postText"
           type="textarea"
           placeholder="Enter your post"
           {...register("postText", {
             required: "You cannot send an empty post",
           })}
-          customError={errors?.postText ? (errors?.postText.message || "Error!") : null}
+          customError={
+            errors?.postText ? errors?.postText.message || "Error!" : null
+          }
         />
-        
       </div>
       <div>
         <button>Add post</button>

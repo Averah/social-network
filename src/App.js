@@ -1,7 +1,8 @@
 import React, { Suspense, useEffect } from 'react';
 import { useDispatch, useSelector, Provider } from "react-redux";
-import { Route, HashRouter } from 'react-router-dom';
+import { Route, HashRouter, Navigate, Routes } from 'react-router-dom';
 import './App.css';
+import NotFoundPage from './components/404Page/NotFoundPage';
 import Preloader from './components/common/Preloader/Preloader';
 import Counter from './components/Counter/Counter';
 import UsersContainer from './components/FindUsers/UsersContainer';
@@ -33,24 +34,16 @@ const App = (props) => {
       <NavbarContainer />
       <div className='app-wrapper-content'>
         <Suspense fallback={<Preloader />}>
-          <Route path='/profile/:userId?'>
-            <ProfileContainerWithHooks />
-          </Route>
-          <Route path='/dialogs'>
-            <DialogsContainer />
-          </Route>
-          <Route path='/friends'>
-            <Friends />
-          </Route>
-          <Route path='/users'>
-            <UsersContainer />
-          </Route>
-          <Route path='/counter'>
-            <Counter />
-          </Route>
-          <Route path='/login'>
-            <LoginPage />
-          </Route>
+          <Routes>
+            <Route path="/" element={<Navigate to="/profile" />} />
+            <Route path="*" element={<NotFoundPage />} />
+            <Route path='/profile/:userId?' element={<ProfileContainerWithHooks />} />
+            <Route path='/dialogs/:userId?' element={<DialogsContainer />} />
+            <Route path='/friends' element={<Friends />} />
+            <Route path='/users' element={<UsersContainer />} />
+            <Route path='/counter' element={<Counter />} />
+            <Route path='/login' element={<LoginPage />} />
+          </Routes>
         </Suspense>
 
       </div>
@@ -67,3 +60,22 @@ const SocialNetworkApp = (props) => {
 }
 
 export default SocialNetworkApp;
+
+{/* <Route path='/profile/:userId?' element={<ProfileContainerWithHooks />}/>
+            <ProfileContainerWithHooks />
+          </Route>
+          <Route path='/dialogs'>
+            <DialogsContainer />
+          </Route>
+          <Route path='/friends'>
+            <Friends />
+          </Route>
+          <Route path='/users'>
+            <UsersContainer />
+          </Route>
+          <Route path='/counter'>
+            <Counter />
+          </Route>
+          <Route path='/login'>
+            <LoginPage />
+          </Route> */}

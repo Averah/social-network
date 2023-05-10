@@ -7,24 +7,27 @@ import {
   updateUsersStatus,
   savePhoto
 } from "../../redux/profileReducer";
-import { withRouter } from "react-router-dom";
+
+import { useParams} from "react-router-dom";
 import { withAuthRedirect } from "../HOC/withAuthRedirect";
 import { compose } from "redux";
 
 export const ProfileContainerWithHooks = (props) => {
+  const params = useParams()
   useEffect(() => {
-    let userId = props.match.params.userId;
+    let userId = params.userId;
     if (!userId) {
       userId = props.authorizedUserId;
     }
     props.getUsersProfile(userId);
     props.getUsersStatus(userId);
   }, [
-    props.match.params.userId,
+    params.userId,
     props.getUsersProfile,
     props.getUsersStatus,
     props.authorizedUserId,
   ]);
+
 
   return (
     <Profile
@@ -32,7 +35,7 @@ export const ProfileContainerWithHooks = (props) => {
       profile={props.profile}
       status={props.status}
       updateUsersStatus={props.updateUsersStatus}
-      isOwner={!props.match.params.userId}
+      isOwner={!params.userId}
       savePhoto={props.savePhoto}
     />
   );
@@ -54,6 +57,5 @@ export default compose(
     updateUsersStatus,
     savePhoto
   }),
-  withRouter,
   withAuthRedirect
 )(ProfileContainerWithHooks);
