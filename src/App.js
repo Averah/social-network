@@ -30,9 +30,14 @@ const App = (props) => {
   }
   return (
     <div className='app-wrapper'>
-      <HeaderContainer />
-      <NavbarContainer />
-      <div className='app-wrapper-content'>
+      <div className='header'>
+        <HeaderContainer />
+      </div>
+      <div className='flex-container'>
+      <div className='navigation'>
+        <NavbarContainer />
+      </div>
+      <div className='content'>
         <Suspense fallback={<Preloader />}>
           <Routes>
             <Route path="/" element={<Navigate to="/profile" />} />
@@ -45,7 +50,7 @@ const App = (props) => {
             <Route path='/login' element={<LoginPage />} />
           </Routes>
         </Suspense>
-
+        </div>
       </div>
     </div>
   );
@@ -61,21 +66,3 @@ const SocialNetworkApp = (props) => {
 
 export default SocialNetworkApp;
 
-{/* <Route path='/profile/:userId?' element={<ProfileContainerWithHooks />}/>
-            <ProfileContainerWithHooks />
-          </Route>
-          <Route path='/dialogs'>
-            <DialogsContainer />
-          </Route>
-          <Route path='/friends'>
-            <Friends />
-          </Route>
-          <Route path='/users'>
-            <UsersContainer />
-          </Route>
-          <Route path='/counter'>
-            <Counter />
-          </Route>
-          <Route path='/login'>
-            <LoginPage />
-          </Route> */}

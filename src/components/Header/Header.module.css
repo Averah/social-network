@@ -1,24 +1,35 @@
 .header {
-  grid-area: h;
   background-color: #A9A9A9;
+  width: 100%;
+  max-height: 48px;
+}
+
+.headerContent {
+  width: 100%;
+  max-width: 1024px;
+  max-height: 48px;
+  display: flex;
+  margin: 0 auto;
+  justify-content:space-between
 
 }
 
-.header img {
-  width: 60px;
+.headerContent img {
+  max-height: 48px;
+
 }
 
 .loginBlock {
-  float: right;
-  color: white;
-
+  align-self:center;
+  max-height: 48px;
 }
 
 .loginBlock a {
   color: #e6eaeb;
   text-decoration: none;
   transition-duration: 0.4s;
-  padding: 10px;
+  /* padding: 10px; */
+
 }
 
 .loginBlock a:hover {
@@ -32,11 +43,11 @@
   border: none;
   font-weight: bold;
   transition-duration: 0.4s;
-  cursor: pointer
+  cursor: pointer;
+  align-self:flex-end
   
 }
 
 .loginBlock button:hover {
-  /* background-color: */
   color: #a8dce9
 }

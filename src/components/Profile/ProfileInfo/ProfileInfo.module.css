@@ -1,8 +1,10 @@
 
 .descriptionBlock {
   display: flex;
-  padding: 10px;
+  padding: 15px;
+
 }
+
 .descriptionBlock button {
   background-color: transparent;
   cursor: pointer;
@@ -17,13 +19,25 @@
   color: #05c5c5
 }
 
+.userAvatar {
+  display: flex;
+  flex-direction: column;
+  padding-right: 15px;
+  justify-content:flex-start;
+  align-items:center
+}
+
+
 .userAvatar img{
-  max-width: 250px;
-  padding-right: 50px;
+  width: 100%;
+ max-width: 250px;
+ padding-bottom: 5px;
+  object-position: center;
+  border-radius: 10%;
 }
 
 .uploadAvatar label {
-  margin-left: 60px;
+  /* object-position: center; */
   transition-duration: 0.4s;
   font-weight: lighter;
   color: black;
@@ -35,15 +49,12 @@
   color: #05c5c5
 }
 
-
 .userData {
-  padding-left: 50px;
-  border-left: 1px solid
-}
 
-.userStatus {
-  padding-top: 5px;
+  padding-left: 15px;
+  border-left: 1px solid;
 
+  
 }
 
 .contacts {
@@ -51,5 +62,5 @@
 }
 
 .editingProfileData {
-  padding-left: 50px;
+  padding-left: 15px;
 }

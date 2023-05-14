@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { addPostActionCreator } from "../../../redux/profileReducer";
 import CustomTextarea from "../../../UI/CustomTextArea/CustomTextArea";
+import s from "./MyPosts.module.css";
 
 const AddPostForm = () => {
   const {
@@ -21,7 +22,7 @@ const AddPostForm = () => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <div>
+
         <CustomTextarea
           name="postText"
           type="textarea"
@@ -33,7 +34,6 @@ const AddPostForm = () => {
             errors?.postText ? errors?.postText.message || "Error!" : null
           }
         />
-      </div>
       <div>
         <button>Add post</button>
       </div>

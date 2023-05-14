@@ -7,7 +7,7 @@ let User = (props) => {
   return (
     <div>
       {props.users.map((u) => (
-        <div key={u.id}>
+        <div key={u.id} className={styles.user}>
           <span>
             <div>
               <NavLink to={`/profile/${u.id}`}>

@@ -1,7 +1,8 @@
 .nav {
-  grid-area: n;
-  background-color: #E0E0E0;
-  padding: 10px;
+  padding: 15px;
+  height: 100%;
+  font-size: 18px;
+
 }
 
 
@@ -15,6 +16,3 @@
   color: #24d6d6;
   font-weight: bold;
 }
-
-
-

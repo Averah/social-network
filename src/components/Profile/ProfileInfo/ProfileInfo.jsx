@@ -6,8 +6,6 @@ import ProfileDataForm from "./ProfileDataForm";
 import { useState } from "react";
 
 const ProfileInfo = (props) => {
-
-
   let [isEditMode, setIsEditMode] = useState(false)
 
   if (!props.profile) {
@@ -26,10 +24,8 @@ const ProfileInfo = (props) => {
  
   return (
     <div className={s.descriptionBlock}>
-      <div>
         <div className={s.userAvatar}>
           <img src={props.profile.photos.large || defaultAvatar} alt="avatar" />
-          
           {props.isOwner && (
             <div className={s.uploadAvatar}>
               <label for="avatar">
@@ -47,14 +43,6 @@ const ProfileInfo = (props) => {
             </div>
           )}
         </div>
-        <div className={s.userStatus}>
-          <ProfileStatusWithHooks
-            status={props.status}
-            updateUsersStatus={props.updateUsersStatus}
-            isOwner={props.isOwner}
-          />
-        </div>
-      </div>
       {isEditMode ? <ProfileDataForm  profile={props.profile} deactivateEditMode={deactivateEditMode}/> : <ProfileData profile={props.profile} 
       isOwner={props.isOwner}
       activateEditMode={activateEditMode} />}
@@ -68,6 +56,13 @@ const ProfileData = (props) => {
       <div>
         <b>Full Name</b>: {props.profile.fullName}
       </div>
+      <div className={s.userStatus}>
+          <ProfileStatusWithHooks
+            status={props.status}
+            updateUsersStatus={props.updateUsersStatus}
+            isOwner={props.isOwner}
+          />
+        </div>
       <div>
         <b>About me</b>: {props.profile.aboutMe}
       </div>
