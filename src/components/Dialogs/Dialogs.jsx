@@ -5,11 +5,11 @@ import Message from "./Message/Message";
 import MessageForm from "./Message/MessageForm";
 
 const Dialogs = (props) => {
-  let dialogsElements = props.dialogsPage.dialogs.map((d) => (
-    <DialogsItem name={d.name} id={d.id} />
+  let dialogsElements = props.dialogsPage.dialogs.map((d, index) => (
+    <DialogsItem name={d.name} id={d.id} key={index} />
   ));
-  let messagesElements = props.dialogsPage.messages.map((m) => (
-    <Message message={m.message} />
+  let messagesElements = props.dialogsPage.messages.map((m, index) => (
+    <Message message={m.message} key={index}/>
   ));
   return (
     <div className={s.dialogs}>

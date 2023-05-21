@@ -1,0 +1,17 @@
+.searchUsers {
+    padding: 15px;
+    display: flex;
+}
+
+
+.searchUsersInput {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    transition-duration: 0.4s;
+
+}
+
+.searchUsersInput:focus {
+    border: 1px solid #24d6d69f;
+
+}

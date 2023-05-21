@@ -1,12 +1,12 @@
 .nav {
-  padding: 15px;
+  padding: 15px 45px 15px 15px;
   height: 100%;
   font-size: 18px;
-
 }
 
 
 .item a {
+  
   color:#354D73;
   text-decoration: none
 }

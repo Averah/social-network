@@ -2,42 +2,73 @@
 .descriptionBlock {
   display: flex;
   padding: 15px;
-
 }
 
 .descriptionBlock button {
-  background-color: transparent;
-  cursor: pointer;
-  transition-duration: 0.4s;
-  font-weight: lighter;
-  opacity: .8;
   margin-top: 10px;
-  border-width: thin;
+
+}
+.userEditingData {
+  width: 350px;
 }
 
-.descriptionBlock button:hover {
-  color: #05c5c5
+.userEditingData input{
+  width: 100%;
+  font-size: 16px;
+  border: 0;
+  border-bottom: 1px solid gray;
+  outline: 0 ;
+  color: black;
+  background: transparent;
+  transition: border 0.4s;
+}
+
+.userEditingData input:focus {
+  border-bottom: 1px solid #24d6d69f;
+}
+.userEditingData input[type='checkbox'] {
+  width: auto;
+}
+
+.checkbox .formField {
+  width: 1px
+}
+
+.userEditingData button {
+  margin-top: 15px;
+  margin-right: 15px;
+}
+.userEditingData button:last-child {
+  margin-right: 0px;
 }
 
 .userAvatar {
+  box-sizing: border-box;
+  width: 250px;
   display: flex;
   flex-direction: column;
   padding-right: 15px;
   justify-content:flex-start;
-  align-items:center
+  align-items:center;
+  flex: 0 0 auto;
 }
+.userStatus {
+  padding-top: 10px;
+  word-break: break-all;
 
-
+}
+.userStatus span {
+  font-weight: bold;
+}
 .userAvatar img{
   width: 100%;
- max-width: 250px;
+  max-width: 250px;
  padding-bottom: 5px;
   object-position: center;
   border-radius: 10%;
 }
 
 .uploadAvatar label {
-  /* object-position: center; */
   transition-duration: 0.4s;
   font-weight: lighter;
   color: black;
@@ -46,21 +77,22 @@
 
 .uploadAvatar label:hover{
   cursor: pointer;
-  color: #05c5c5
+  color: #05c5c5;
+
 }
 
 .userData {
-
   padding-left: 15px;
   border-left: 1px solid;
+  word-break: break-all;
+  flex: 0 1 auto
 
-  
 }
 
 .contacts {
   padding-top: 10px;
 }
 
-.editingProfileData {
-  padding-left: 15px;
+.formField {
+  margin-bottom: 12px;
 }

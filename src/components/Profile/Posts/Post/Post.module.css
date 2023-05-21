@@ -1,11 +1,25 @@
 
-
 .item {
   color: #05c5c5;
+  padding: 10px;
+  display: flex;
+  flex-wrap:wrap
+}
+
+.avatar {
+
+}
+
+.postText {
+  flex: 0 1 80%;
+  padding-left: 10px;
+  align-self: center;
 }
 
 .likes {
   color: grey;
+  flex: 0 1 100%;
+  align-self:flex-end
 }
 
 

@@ -1,13 +1,26 @@
-p {
-  color: red
+.errorMessage {
+  color: red;
+  padding: 10px 0px;
 }
 
 .customTextarea {
+  font-family: 'SourceSansPro';
   text-align: left;
   padding: 15px 15px;
   border: 2px solid #ccc;
-  border-radius: 4px;
-  background-color: #f8f8f8;
+  border-radius: 10px;
+  background-color: #f4f5f5bc;
   font-size: 16px;
   resize: none;
+  outline: none;
+  overflow: auto;
+  transition-duration: 0.4s;
+
 }
+
+.customTextarea:focus {
+  border: 2px solid #24d6d69f;
+  transition-duration: 0.4s
+}
+
+

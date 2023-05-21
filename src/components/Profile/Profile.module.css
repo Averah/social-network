@@ -1,0 +1,9 @@
+.profileContent {
+    display: flex;
+    flex-direction: column;
+}
+
+.profilePosts {
+    max-width: 800px;
+    width: 100%;
+}

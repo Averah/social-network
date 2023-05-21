@@ -1,7 +1,12 @@
+import s from './Friends.module.css'
 
+ const Friends = (props) => {
+  return (<div className={s.friendsList}>
+    Friends
+  </div>
+  )
 
-const Friends = () => {
-  return <div>Friends</div>;
-};
+}
 
-export default Friends;
+export default Friends
+

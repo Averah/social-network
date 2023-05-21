@@ -1,17 +1,20 @@
 import React from "react";
 import Pagination from "../common/Pagination/Pagination";
-import User from "./User";
+import SearchUsers from "./SearchUsers";
+import UsersList from "./UsersList";
+import s from "./FindUsers.module.css";
 
-let Users = (props) => {
+let FindUsers = (props) => {
   return (
-    <div>
+    <div className={s.usersPage}>
       <Pagination
         currentPage={props.currentPage}
         onPageChanged={props.onPageChanged}
         totalItemsCount={props.totalUsersCount}
         pageSize={props.pageSize}
       />
-      <User
+      <SearchUsers />
+      <UsersList
         users={props.users}
         followingInProgress={props.followingInProgress}
         follow={props.follow}
@@ -20,4 +23,4 @@ let Users = (props) => {
     </div>
   );
 };
-export default Users;
+export default FindUsers;

@@ -5,7 +5,7 @@ import AddPostForm from "./AddPostForm";
 
 const MyPosts = React.memo(props => {
   let postsElements = props.profilePage.posts.map((p) => (
-    <Post message={p.message} likes={p.likes} />
+    <Post message={p.message} likes={p.likes} key={p.id} />
   ));
   return (
     <div className={s.postsBlock}>

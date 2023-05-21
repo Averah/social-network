@@ -1,8 +1,13 @@
 .postsBlock {
-    padding: 10px 10px;
-
+    padding: 10px 15px;
+    flex: 0 1 auto;
 }
 
 .posts {
-    padding-top: 10px
+    padding-top: 10px;
+    margin-top: 10px;
+}
+
+.addPost textarea{
+    width: 250px
 }

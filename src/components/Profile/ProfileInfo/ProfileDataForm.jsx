@@ -2,13 +2,15 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { saveProfile } from "../../../redux/profileReducer";
+import { CustomContentButton } from "../../../UI/CustomContentButton/CustomContentButton";
+import cn from "classnames";
 import s from "./ProfileInfo.module.css";
 
 const ProfileDataForm = (props) => {
-  const {
-    register,
-    handleSubmit,
-  } = useForm({ mode: "onBlur", defaultValues: props.profile });
+  const { register, handleSubmit } = useForm({
+    mode: "onBlur",
+    defaultValues: props.profile,
+  });
 
   const dispatch = useDispatch();
 
@@ -27,11 +29,11 @@ const ProfileDataForm = (props) => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className={s.userData}>
-      <div>
-        <b>
-          <label for="fullName">Full Name:</label>
-        </b>
+    <form onSubmit={handleSubmit(onSubmit)} className={s.userEditingData}>
+      <div className={s.formField}>
+        <div>
+          <label htmlFor="fullName">Full Name:</label>
+        </div>
         <input
           id="fullName"
           type="text"
@@ -39,10 +41,10 @@ const ProfileDataForm = (props) => {
           {...register("fullName")}
         />
       </div>
-      <div>
-        <b>
-          <label for="aboutMe">About me:</label>
-        </b>
+      <div className={s.formField}>
+        <div>
+          <label htmlFor="aboutMe">About me:</label>
+        </div>
         <input
           type="text"
           id="aboutMe"
@@ -50,20 +52,22 @@ const ProfileDataForm = (props) => {
           {...register("aboutMe")}
         />
       </div>
-      <div className={s.checkbox}>
-        <b>Looking for a job:</b>
+      <div className={cn(s.checkbox, s.formField)}>
+        <span>Looking for a job:</span>
         <input
           type="checkbox"
           id="lookingForAJob"
           name="checkbox"
           {...register("lookingForAJob")}
         />
-        <label for="true"></label>
+        <label htmlFor="true"></label>
       </div>
-      <div>
-        <b>
-          <label for="lookingForAJobDescription">My professional skills:</label>
-        </b>
+      <div className={s.formField}>
+        <div>
+          <label htmlFor="lookingForAJobDescription">
+            My professional skills:
+          </label>
+        </div>
         <input
           type="textarea"
           name="lookingForAJobDescription"
@@ -71,11 +75,11 @@ const ProfileDataForm = (props) => {
           {...register("lookingForAJobDescription")}
         />
       </div>
-      {Object.entries(props.profile.contacts).map(([key]) => (
-        <div className={s.contact}>
-          <b>
-            <label for="contact">{key}</label>
-          </b>
+      {Object.entries(props.profile.contacts).map(([key], index) => (
+        <div className={cn(s.contact, s.formField)} key={index}>
+          <div>
+            <label htmlFor="contact">{key}:</label>
+          </div>
           <input
             type="text"
             name={`contacts.${key}`}
@@ -84,13 +88,19 @@ const ProfileDataForm = (props) => {
         </div>
       ))}
       <div>
-          {error && <p style={{ color: "red" }}>{error.join(', ') || "Error!"}</p>}
-        </div>
-      <button type="submit">Save changes</button>
+        {error && (
+          <p style={{ color: "red" }}>{error.join(", ") || "Error!"}</p>
+        )}
+      </div>
+      <CustomContentButton type="submit">Save changes</CustomContentButton>
       <span>
-        <button type="button" onClick={cancelChanges}>
+        <CustomContentButton
+          className={s.cancelChangesBtn}
+          type="button"
+          onClick={cancelChanges}
+        >
           Cancel changes
-        </button>
+        </CustomContentButton>
       </span>
     </form>
   );

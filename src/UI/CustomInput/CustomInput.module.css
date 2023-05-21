@@ -1,0 +1,14 @@
+.customInput{
+    font-family: 'SourceSansPro';
+    font-size: 16px;
+    margin-left: 5px;
+    border: 0;
+    border-bottom: 1px solid #ccc;
+    outline: none;
+    color: black;
+    background: transparent;
+    transition: border 0.4s;
+  }
+  .customInput:focus {
+    border-bottom: 1px solid #24d6d69f;
+  }

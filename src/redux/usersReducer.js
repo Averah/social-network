@@ -7,7 +7,7 @@ const SET_USERS = 'social-network/users/SET_USERS';
 const SET_CURRENT_PAGE = 'social-network/users/SET_CURRENT_PAGE';
 const SET_TOTAL_USERS_COUNT = 'social-network/users/SET_TOTAL_USERS_COUNT';
 const TOGGLE_IS_FETCHING = 'social-network/users/TOGGLE_IS_FETCHING'
-const TOGGLE_IS_FOLLOWING_PROGRESS = 'TOGGLE_IS_FOLLOWING_PROGRESS'
+const TOGGLE_IS_FOLLOWING_PROGRESS = 'social-network/TOGGLE_IS_FOLLOWING_PROGRESS'
 
 
 let initialState = {

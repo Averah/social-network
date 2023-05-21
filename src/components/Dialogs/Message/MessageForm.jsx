@@ -2,6 +2,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { addDialogsMessageActionCreator } from "../../../redux/dialogsReducer";
+import { CustomContentButton } from "../../../UI/CustomContentButton/CustomContentButton";
 import CustomTextarea from "../../../UI/CustomTextArea/CustomTextArea";
 
 const MessageForm = () => {
@@ -37,7 +38,7 @@ const MessageForm = () => {
         />
       </div>
       <div>
-        <button>Send message</button>
+        <CustomContentButton>Send message</CustomContentButton>
       </div>
     </form>
   );

@@ -1,0 +1,24 @@
+.modalOverlay {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.774);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow-y: auto;
+    transition: all 0.3s ease;
+
+
+}
+
+.content {
+    font-family: 'SourceSansPro';
+    background-color: #F0F0F0;
+    padding: 20px 35px ;
+    border-radius: 10px;
+    max-width: 85%;
+    box-shadow: 2px 4px 27px 6px rgba(0, 0, 0, 0.44)
+}

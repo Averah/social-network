@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
+import { CustomInput } from "../../../UI/CustomInput/CustomInput";
+
+
 const ProfileStatusWithHooks = (props) => {
   let [editMode, setEditMode] = useState(false);
   let [status, setStatus] = useState(props.status);
@@ -25,7 +28,7 @@ const ProfileStatusWithHooks = (props) => {
 
   return props.isOwner && editMode ? (
     <div>
-      <input
+      <CustomInput
         onChange={onStatusChange}
         onBlur={deactivateEditMode}
         autoFocus={true}
@@ -33,11 +36,10 @@ const ProfileStatusWithHooks = (props) => {
       />
     </div>
   ) : (
-    <div>
-      <span onClick={activateEditMode}>
-        <b>Status:</b> {props.status || ""}
-      </span>
-    </div>
+     <div onClick={activateEditMode}>
+      <span>Status: </span>{props.status}
+   </div>
+   
   );
 };
 

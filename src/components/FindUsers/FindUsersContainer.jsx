@@ -9,7 +9,7 @@ import {
   requestUsers,
 } from "../../redux/usersReducer";
 
-import Users from "./Users";
+
 import Preloader from "../common/Preloader/Preloader";
 import { compose } from "redux";
 import {
@@ -20,8 +20,9 @@ import {
   getTotalUsersCount,
   getUsers,
 } from "../../redux/users-selectors";
+import FindUsers from "./FindUsers";
 
-class UsersContainer extends React.Component {
+class FindUsersContainer extends React.Component {
   componentDidMount() {
     this.props.requestUsers(this.props.currentPage, this.props.pageSize);
   }
@@ -35,7 +36,7 @@ class UsersContainer extends React.Component {
     return (
       <>
         {this.props.isFetching ? <Preloader /> : null}
-        <Users
+        <FindUsers
           totalUsersCount={this.props.totalUsersCount}
           // setTotalUsersCount={this.props.setTotalUsersCount}
           pageSize={this.props.pageSize}
@@ -72,4 +73,4 @@ export default compose(
     toggleFollowingProgress,
     requestUsers,
   })
-)(UsersContainer);
+)(FindUsersContainer);

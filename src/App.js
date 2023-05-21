@@ -5,7 +5,7 @@ import './App.css';
 import NotFoundPage from './components/404Page/NotFoundPage';
 import Preloader from './components/common/Preloader/Preloader';
 import Counter from './components/Counter/Counter';
-import UsersContainer from './components/FindUsers/UsersContainer';
+import FindUsersContainer from './components/FindUsers/FindUsersContainer';
 import Friends from './components/Friends/Friends';
 import HeaderContainer from './components/Header/HeaderContainer';
 import LoginPage from './components/Login/LoginPage';
@@ -45,7 +45,7 @@ const App = (props) => {
             <Route path='/profile/:userId?' element={<ProfileContainerWithHooks />} />
             <Route path='/dialogs/:userId?' element={<DialogsContainer />} />
             <Route path='/friends' element={<Friends />} />
-            <Route path='/users' element={<UsersContainer />} />
+            <Route path='/users' element={<FindUsersContainer />} />
             <Route path='/counter' element={<Counter />} />
             <Route path='/login' element={<LoginPage />} />
           </Routes>

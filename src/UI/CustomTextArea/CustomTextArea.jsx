@@ -8,12 +8,14 @@ import s from "./CustomTextArea.module.css";
       <div>
         <textarea {...otherProps} ref={ref} className={s.customTextarea}/>
         {customError && (
-        <p>
+        <div className={s.errorMessage}>
           {customError}
-        </p>
+        </div>
         )}
       </div>
     );
   });
+
+
 
   export default CustomTextarea

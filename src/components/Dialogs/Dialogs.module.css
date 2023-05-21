@@ -1,17 +1,18 @@
 .dialogs {
     display: flex;
     padding: 15px;
+}
 
+
+.dialogs textarea {
+    margin-top: 50px;
+    width: 250px;
 }
 
 .dialogsItem a {
     text-decoration: none;
 }
 
-.newMessage {
-    padding-top: 200px;
-    
-}
 .messages {
     display: flex;
     flex-direction:column;
@@ -19,7 +20,7 @@
     
 }
 
-.message {
 
+.message {
     flex: 1 1 auto
 }

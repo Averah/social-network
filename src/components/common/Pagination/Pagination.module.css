@@ -1,12 +1,31 @@
 .pagination {
-    padding: 15px;
-}
-.pageNumber {
-    padding: 1px;
-    border: 1px solid grey;
+    padding: 15px
+
 }
 
+.pageNumber {
+    color: #7c7c7c;
+    padding: 5px;
+    cursor: pointer;
+    transition-duration: 0.4s;
+}
+
+.pageNumber:hover {
+    color:#24d6d69f;
+
+}
+
+
 .pageNumber.selectedPage {
+    padding: 5px;
+    font-family: 'SourceSansPro';
+    color: #24d6d69f;;
     font-weight: bold;
-    border-color: black;
+    border-bottom: 1px solid #24d6d69f;
+    padding: 5px
+
+}
+
+.paginationButton {
+    margin: 0px 5px;
 }

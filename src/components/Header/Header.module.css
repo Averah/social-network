@@ -5,6 +5,7 @@
 }
 
 .headerContent {
+  
   width: 100%;
   max-width: 1024px;
   max-height: 48px;
@@ -25,19 +26,22 @@
 }
 
 .loginBlock a {
+  font-family: 'SourceSansPro';
   color: #e6eaeb;
   text-decoration: none;
   transition-duration: 0.4s;
-  /* padding: 10px; */
 
 }
 
 .loginBlock a:hover {
   color: #a8dce9;
+  transition-duration: 0.4s;
   
 }
 
 .loginBlock button {
+  font-family: 'SourceSansPro';
+  font-size: 14px;
   color: #e6eaeb;
   background-color: transparent;
   border: none;

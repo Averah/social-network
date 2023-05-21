@@ -1,5 +1,6 @@
-
-
+.dialog {
+    padding-bottom: 5px;
+}
 .dialog  a.active {
     color: #24d6d6;
 

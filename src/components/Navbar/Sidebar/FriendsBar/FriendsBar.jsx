@@ -2,8 +2,8 @@ import Friend from "./Friend/Friend";
 import s from "./FriendsBar.module.css";
 
 const FriendsBar = (props) => {
-  let friendsList = props.friends.map((f) => 
-  <Friend friend={f.friend} />);
+  let friendsList = props.friends.map((f, index) => 
+  <Friend friend={f.friend} key={index}/>);
   
   return (
 

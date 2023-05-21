@@ -1,12 +1,11 @@
+import defaultAvatar from "../../../../images/DefaultAvatar/defaultAvatar.png";
 import s from "./Post.module.css";
 
 const Post = (props) => {
   return (
-
-    
     <div className={s.item}>
-      <img src="https://png.pngtree.com/element_our/png_detail/20181228/avatar-icon-design-vector-png_296561.jpg"></img>
-      {props.message}
+      <img src={defaultAvatar} className={s.avatar}></img>
+      <span className={s.postText}>{props.message}</span>
       <div className={s.likes}>{props.likes}</div>
     </div>
   );

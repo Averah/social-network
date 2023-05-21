@@ -10,6 +10,7 @@ import thunk from "redux-thunk"
 import { appReducer } from "./appReducer";
 
 
+
 let reducers = combineReducers({
     profilePage: profileReducer,
     dialogsPage: dialogsReducer,
@@ -17,14 +18,14 @@ let reducers = combineReducers({
     usersPage: usersReducer,
     auth: authReducer,
     counter: counterReducer,
-    app: appReducer
+    app: appReducer,
 })
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-const store = createStore(reducers, /* preloadedState, */ composeEnhancers(applyMiddleware(thunk)
+const store = createStore(reducers, composeEnhancers(applyMiddleware(thunk)
   ));
 
-// let store = createStore(reducers, applyMiddleware(thunk))
+
 
 window.__store__ = store
 

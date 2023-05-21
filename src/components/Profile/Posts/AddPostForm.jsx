@@ -2,6 +2,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { addPostActionCreator } from "../../../redux/profileReducer";
+import { CustomContentButton } from "../../../UI/CustomContentButton/CustomContentButton";
 import CustomTextarea from "../../../UI/CustomTextArea/CustomTextArea";
 import s from "./MyPosts.module.css";
 
@@ -21,8 +22,7 @@ const AddPostForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-
+    <form onSubmit={handleSubmit(onSubmit)} className={s.addPost}>
         <CustomTextarea
           name="postText"
           type="textarea"
@@ -35,7 +35,7 @@ const AddPostForm = () => {
           }
         />
       <div>
-        <button>Add post</button>
+        <CustomContentButton>Add post</CustomContentButton>
       </div>
     </form>
   );

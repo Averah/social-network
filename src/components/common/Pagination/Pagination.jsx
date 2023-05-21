@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import cn from "classnames";
-import styles from "./Pagination.module.css";
+import s from "./Pagination.module.css";
+import { CustomContentButton } from "../../../UI/CustomContentButton/CustomContentButton";
 
 let Pagination = (props) => {
   let pagesCount = Math.ceil(props.totalItemsCount / props.pageSize);
@@ -16,15 +17,15 @@ let Pagination = (props) => {
   let rightPortionPageNumber = portionNumber * portionSize;
 
   return (
-    <div className={styles.pagination}>
+    <div className={s.pagination}>
       {portionNumber > 1 && (
-        <button
+        <CustomContentButton className={s.paginationButton}
           onClick={() => {
             setPortionNumber(portionNumber - 1);
           }}
         >
           PREV
-        </button>
+        </CustomContentButton>
       )}
 
       {pages
@@ -36,9 +37,9 @@ let Pagination = (props) => {
             <span
               className={cn(
                 {
-                  [styles.selectedPage]: props.currentPage === p,
+                  [s.selectedPage]: props.currentPage === p,
                 },
-                styles.pageNumber
+                s.pageNumber
               )}
               key={p}
               onClick={(e) => {
@@ -50,13 +51,13 @@ let Pagination = (props) => {
           );
         })}
       {portionCount > portionNumber && (
-        <button
+        <CustomContentButton className={s.paginationButton}
           onClick={() => {
             setPortionNumber(portionNumber + 1);
           }}
         >
           NEXT
-        </button>
+        </CustomContentButton>
       )}
     </div>
   );

@@ -1,0 +1,20 @@
+
+.customContentButton{
+font-family: 'SourceSansPro';
+font-weight: 400;
+font-size: 14px;
+color: #707070;
+background: #e5e7e7bc;
+padding: 5px 10px;
+border: solid 1px #cccccc ;
+border-radius: 10px;
+cursor: pointer;
+transition: all 0.4s
+}
+
+.customContentButton:hover{
+background: linear-gradient(90deg, #e7e7e7 0%, #d5d7d8bc 100%);
+border: solid 1px #818181;
+color: #616161;
+}
+
