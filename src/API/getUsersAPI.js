@@ -1,9 +1,8 @@
 import { axiosInstance } from "./axiosInstance";
 
-export const getUsersAPI = (currentPage, pageSize) => {
-  return axiosInstance
-    .get(`users?page=${currentPage}&count=${pageSize}`)
-    .then((response) => response.data);
+export const getUsersAPI = async(currentPage, pageSize, searchData ) => {
+  const response = await axiosInstance.get(`users?${searchData ? `term=${searchData}&` : ''}page=${currentPage}&count=${pageSize}`)
+    return response.data;
 };
 
-
+// ${searchData ? `&term=${searchData}` : ''}

@@ -11,7 +11,7 @@ const MessageForm = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({ mode: "onBlur" });
+  } = useForm({ mode: "onChange" });
 
   const dispatch = useDispatch();
 

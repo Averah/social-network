@@ -4,7 +4,9 @@ import s from "./Pagination.module.css";
 import { CustomContentButton } from "../../../UI/CustomContentButton/CustomContentButton";
 
 let Pagination = (props) => {
+
   let pagesCount = Math.ceil(props.totalItemsCount / props.pageSize);
+  console.log(pagesCount);
 
   let pages = [];
   for (let i = 1; i <= pagesCount; i++) {

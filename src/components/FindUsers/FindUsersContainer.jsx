@@ -17,6 +17,7 @@ import {
   getFollowingInProgress,
   getIsFetching,
   getPageSize,
+  getSearchData,
   getTotalUsersCount,
   getUsers,
 } from "../../redux/users-selectors";
@@ -24,18 +25,17 @@ import FindUsers from "./FindUsers";
 
 class FindUsersContainer extends React.Component {
   componentDidMount() {
-    this.props.requestUsers(this.props.currentPage, this.props.pageSize);
+    this.props.requestUsers();
   }
 
   onPageChanged = (pageNumber) => {
     this.props.setCurrentPage(pageNumber);
-    this.props.requestUsers(pageNumber, this.props.pageSize);
+    this.props.requestUsers(this.props.searchData);
   };
 
   render() {
     return (
       <>
-        {this.props.isFetching ? <Preloader /> : null}
         <FindUsers
           totalUsersCount={this.props.totalUsersCount}
           // setTotalUsersCount={this.props.setTotalUsersCount}
@@ -61,6 +61,7 @@ let mapStateToProps = (state) => {
     currentPage: getCurrentPage(state),
     isFetching: getIsFetching(state),
     followingInProgress: getFollowingInProgress(state),
+    searchData: getSearchData(state)
   };
 };
 
@@ -72,5 +73,6 @@ export default compose(
     setTotalUsersCount,
     toggleFollowingProgress,
     requestUsers,
+    
   })
 )(FindUsersContainer);

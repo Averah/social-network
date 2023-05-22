@@ -7,7 +7,8 @@ const SET_USERS = 'social-network/users/SET_USERS';
 const SET_CURRENT_PAGE = 'social-network/users/SET_CURRENT_PAGE';
 const SET_TOTAL_USERS_COUNT = 'social-network/users/SET_TOTAL_USERS_COUNT';
 const TOGGLE_IS_FETCHING = 'social-network/users/TOGGLE_IS_FETCHING'
-const TOGGLE_IS_FOLLOWING_PROGRESS = 'social-network/TOGGLE_IS_FOLLOWING_PROGRESS'
+const TOGGLE_IS_FOLLOWING_PROGRESS = 'social-network//users/TOGGLE_IS_FOLLOWING_PROGRESS'
+const SET_SEARCH_DATA = 'social-network//users/SET_SEARCH_DATA'
 
 
 let initialState = {
@@ -16,10 +17,10 @@ let initialState = {
     totalUsersCount: 0,
     currentPage: 1,
     isFetching: true,
-    followingInProgress: []
+    followingInProgress: [],
+    searchData: ''
 
 };
-
 export const usersReducer = (state = initialState, action) => {
     switch (action.type) {
         case FOLLOW_SUCCESS:
@@ -62,41 +63,47 @@ export const usersReducer = (state = initialState, action) => {
                     : state.followingInProgress.filter(id => id !== action.userId)
             }
         }
+        case SET_SEARCH_DATA: {
+            return { ...state, searchData: action.searchData }
+        }
+
         default:
             return state;
     }
 }
 
 
-export const requestUsers = (currentPage, pageSize) => async (dispatch) => {
+export const requestUsers = (searchData) => async (dispatch, getState) => {
+    const currentPage = getState().usersPage.currentPage
+    const pageSize = getState().usersPage.pageSize
     dispatch(toggleIsFetching(true));
-   let data = await getUsersAPI(currentPage, pageSize)
-        dispatch(setCurrentPage(currentPage))
-        dispatch(toggleIsFetching(false));
-        dispatch(setUsers(data.items));
-        dispatch(setTotalUsersCount(data.totalCount));
-    ;
+    let data = await getUsersAPI(currentPage, pageSize, searchData)
+    dispatch(setCurrentPage(currentPage))
+    dispatch(setSearchData(searchData))
+    dispatch(toggleIsFetching(false));
+    dispatch(setUsers(data.items));
+    dispatch(setTotalUsersCount(data.totalCount));
 }
 
 export const follow = (id) => async (dispatch) => {
-        dispatch(toggleFollowingProgress(true, id))
-       let data = await followAPI.followUser(id)
-            if (data.resultCode === 0) {
-                dispatch(followSuccess(id));
-            }
-            dispatch(toggleFollowingProgress(false, id))
-    };
-
-
-export const unfollow = (id) => async(dispatch) => {
-        dispatch(toggleFollowingProgress(true, id))
-        let data = await followAPI.unfollowUser(id)
-            if (data.resultCode === 0) {
-                dispatch(unfollowSuccess(id));
-            }
-            dispatch(toggleFollowingProgress(false, id))
-    
+    dispatch(toggleFollowingProgress(true, id))
+    let data = await followAPI.followUser(id)
+    if (data.resultCode === 0) {
+        dispatch(followSuccess(id));
     }
+    dispatch(toggleFollowingProgress(false, id))
+};
+
+
+export const unfollow = (id) => async (dispatch) => {
+    dispatch(toggleFollowingProgress(true, id))
+    let data = await followAPI.unfollowUser(id)
+    if (data.resultCode === 0) {
+        dispatch(unfollowSuccess(id));
+    }
+    dispatch(toggleFollowingProgress(false, id))
+
+}
 
 
 
@@ -107,5 +114,6 @@ export const setCurrentPage = (currentPage) => ({ type: SET_CURRENT_PAGE, curren
 export const setTotalUsersCount = (totalUsersCount) => ({ type: SET_TOTAL_USERS_COUNT, count: totalUsersCount })
 export const toggleIsFetching = (isFetching) => ({ type: TOGGLE_IS_FETCHING, isFetching })
 export const toggleFollowingProgress = (isFetching, userId) => ({ type: TOGGLE_IS_FOLLOWING_PROGRESS, isFetching, userId })
+export const setSearchData = (searchData) => ({ type: SET_SEARCH_DATA, searchData })
 
 

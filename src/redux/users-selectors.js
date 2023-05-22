@@ -23,3 +23,6 @@ export const getFollowingInProgress = (state) => {
     return state.usersPage.followingInProgress
 }
 
+export const getSearchData = (state) => {
+    return state.usersPage.searchData
+}

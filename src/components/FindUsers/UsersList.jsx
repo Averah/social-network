@@ -2,10 +2,18 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import s from "./UsersList.module.css";
 import UserCard from "./UserCard";
+import {useSelector} from "react-redux"
+import Preloader from "../common/Preloader/Preloader";
 
 let UsersList = (props) => {
+  const isFetching = useSelector(state => state.usersPage.isFetching)
+  
+  if (props.users.length === 0) {
+    return <div className={s.emptyUsersList}> No matches found</div>
+  }
   return (
     <div className={s.usersList}>
+      {isFetching ? <Preloader /> : null}
       {props.users.map((u) => (
         <NavLink to={`/profile/${u.id}`} className={s.userCardLink} key={u.id}>
           <UserCard
@@ -18,7 +26,7 @@ let UsersList = (props) => {
         </NavLink>
       ))}
     </div>
-  );
+  )
 };
 
 export default UsersList;

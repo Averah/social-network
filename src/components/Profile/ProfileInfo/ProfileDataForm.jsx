@@ -1,7 +1,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import { saveProfile } from "../../../redux/profileReducer";
+import { saveProfile, showErrorMessages } from "../../../redux/profileReducer";
 import { CustomContentButton } from "../../../UI/CustomContentButton/CustomContentButton";
 import cn from "classnames";
 import s from "./ProfileInfo.module.css";
@@ -16,17 +16,20 @@ const ProfileDataForm = (props) => {
 
   const onSubmit = async (data) => {
     const serverResponseMessage = await dispatch(saveProfile(data));
-
     if (serverResponseMessage === "success") {
       props.deactivateEditMode();
     }
   };
-  const error = useSelector((state) => state.profilePage.errorMessages);
 
-  const cancelChanges = () => {
+  const onCancelClick = () => {
     const deactivateEditMode = props.deactivateEditMode;
     deactivateEditMode();
-  };
+    dispatch(showErrorMessages(''))
+    
+  }
+  const error = useSelector((state) => state.profilePage.errorMessages);
+
+
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={s.userEditingData}>
@@ -97,7 +100,7 @@ const ProfileDataForm = (props) => {
         <CustomContentButton
           className={s.cancelChangesBtn}
           type="button"
-          onClick={cancelChanges}
+          onClick={onCancelClick}
         >
           Cancel changes
         </CustomContentButton>

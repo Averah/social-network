@@ -1,17 +1,28 @@
-.searchUsers {
-    padding: 15px;
+.searchUsersForm {
     display: flex;
+    align-items: center;
+    padding: 15px 0px;
 }
 
 
-.searchUsersInput {
+
+.searchUsersForm input {
     border: 1px solid #ccc;
     border-radius: 5px;
-    transition-duration: 0.4s;
+    transition: all 0.4s;
+    margin-left: 15px;
+    padding: 5px;
+    width: 200px;
 
 }
 
-.searchUsersInput:focus {
+.searchUsersForm input:focus {
     border: 1px solid #24d6d69f;
+    background-color: rgb(234, 240, 240);
+
+}
+
+.searchButton {
+    margin-left: 5px;
 
 }
