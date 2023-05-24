@@ -1,7 +1,7 @@
+import { ProfileType, PhotosType, PostType } from './../Types/types';
 import { profileAPI } from "../API/profileAPI"
 
 const ADD_POST = 'social-network/profile/ADD-POST'
-const UPDATE_NEW_POST_TEXT = 'social-network/profile/UPDATE-NEW-POST-TEXT'
 const SET_USER_PROFILE = 'social-network/profile/SET-USER-PROFILE'
 const SET_USER_STATUS = 'social-network/profile/SET-USER-STATUS'
 const DELETE_POST = 'social-network/profile/DELETE_POST'
@@ -13,13 +13,18 @@ let initialState = {
     posts: [
         { id: 1, message: "Hey, it is me", likes: "10 likes" },
         { id: 2, message: "It is my new post", likes: "15 likes" },
-        { id: 3, message: "It is my second post", likes: "20 likes" },],
-    profile: null,
+        { id: 3, message: "It is my second post", likes: "20 likes" },] as Array<PostType>,
+    profile: null as ProfileType | null,
     status: '',
-    errorMessages: ''
+    errorMessages: '',
 }
+type InitialStateType = typeof initialState
 
-export const profileReducer = (state = initialState, action) => {
+
+type CommonType = AddPostActionType | SetUserProfileType | SetUserStatusType | DeletePostType
+    | SavePhotoSuccessType | SaveProfileSuccessType | ShowErrorMessagesType
+
+export const profileReducer = (state = initialState, action: CommonType): InitialStateType => {
     switch (action.type) {
         case ADD_POST: {
             let newPost = {
@@ -33,14 +38,6 @@ export const profileReducer = (state = initialState, action) => {
 
             return stateCopy
         }
-        case UPDATE_NEW_POST_TEXT: {
-
-            return {
-                ...state,
-                newPostText: action.newText
-            }
-
-        }
         case DELETE_POST: {
             return { ...state, posts: state.posts.filter(p => p.id !== action.postId) }
         }
@@ -51,13 +48,13 @@ export const profileReducer = (state = initialState, action) => {
             return { ...state, status: action.status }
         }
         case SAVE_PHOTO_SUCCESS: {
-            return { ...state, profile: { ...state.profile, photos: action.photos } }
+            return { ...state, profile: { ...state.profile, photos: action.photos } as ProfileType }
         }
         case SAVE_PROFILE_SUCCESS: {
             return { ...state, profile: action.profile }
         }
         case SHOW_ERROR_MESSAGE: {
-            return {...state, errorMessages: action.errorMessages}
+            return { ...state, errorMessages: action.errorMessages }
         }
 
         default:
@@ -65,19 +62,19 @@ export const profileReducer = (state = initialState, action) => {
     }
 }
 
-export const getUsersProfile = (userId) => async (dispatch) => {
+export const getUsersProfile = (userId: number) => async (dispatch: any) => {
     let response = await profileAPI.getProfile(userId)
     dispatch(setUserProfile(response.data));
 }
 
 
-export const getUsersStatus = (userId) => async (dispatch) => {
+export const getUsersStatus = (userId: number) => async (dispatch: any) => {
     let response = await profileAPI.getStatus(userId)
     dispatch(setUserStatus(response.data))
 }
 
 
-export const updateUsersStatus = (status) => async (dispatch) => {
+export const updateUsersStatus = (status: string) => async (dispatch) => {
     let response = await profileAPI.updateStatus(status)
     if (response.data.resultCode === 0)
         dispatch(setUserStatus(status))
@@ -94,7 +91,7 @@ export const saveProfile = (profile) => async (dispatch, getState) => {
     let response = await profileAPI.saveProfile(profile)
     if (response.data.resultCode === 0) {
         dispatch(getUsersProfile(userId))
-        dispatch(showErrorMessages(null))
+        dispatch(showErrorMessages(''))
         return 'success'
     } else {
         dispatch(showErrorMessages(response.data.messages))
@@ -102,13 +99,42 @@ export const saveProfile = (profile) => async (dispatch, getState) => {
     }
 }
 
+type AddPostActionType = {
+    type: typeof ADD_POST
+    postText: string
+}
+type SetUserProfileType = {
+    type: typeof SET_USER_PROFILE
+    profile: ProfileType
+}
+type SetUserStatusType = {
+    type: typeof SET_USER_STATUS
+    status: string
+}
+type DeletePostType = {
+    type: typeof DELETE_POST
+    postId: number
+}
+type SavePhotoSuccessType = {
+    type: typeof SAVE_PHOTO_SUCCESS
+    photos: PhotosType
+}
 
-export const addPostActionCreator = (postText) => ({ type: ADD_POST, postText })
-export const updateNewPostTextActionCreator = (text) =>
-    ({ type: UPDATE_NEW_POST_TEXT, newText: text })
-export const setUserProfile = (profile) => ({ type: SET_USER_PROFILE, profile })
-export const setUserStatus = (status) => ({ type: SET_USER_STATUS, status })
-export const deletePost = (postId) => ({ type: DELETE_POST, postId })
-export const savePhotoSuccess = (photos) => ({ type: SAVE_PHOTO_SUCCESS, photos })
-export const saveProfileSuccess = (profile) => ({ type: SAVE_PROFILE_SUCCESS, profile })
-export const showErrorMessages = (errorMessages) => ({type: SHOW_ERROR_MESSAGE, errorMessages})
+type SaveProfileSuccessType = {
+    type: typeof SAVE_PROFILE_SUCCESS
+    profile: ProfileType
+}
+
+type ShowErrorMessagesType = {
+    type: typeof SHOW_ERROR_MESSAGE
+    errorMessages: string
+}
+
+
+export const addPostActionCreator = (postText: string): AddPostActionType => ({ type: ADD_POST, postText })
+export const setUserProfile = (profile: ProfileType): SetUserProfileType => ({ type: SET_USER_PROFILE, profile })
+export const setUserStatus = (status: string): SetUserStatusType => ({ type: SET_USER_STATUS, status })
+export const deletePost = (postId: number): DeletePostType => ({ type: DELETE_POST, postId })
+export const savePhotoSuccess = (photos: PhotosType): SavePhotoSuccessType => ({ type: SAVE_PHOTO_SUCCESS, photos })
+export const saveProfileSuccess = (profile: ProfileType): SaveProfileSuccessType => ({ type: SAVE_PROFILE_SUCCESS, profile })
+export const showErrorMessages = (errorMessages: string): ShowErrorMessagesType => ({ type: SHOW_ERROR_MESSAGE, errorMessages })

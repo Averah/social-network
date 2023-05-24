@@ -6,7 +6,7 @@ import { CustomContentButton } from "../../../UI/CustomContentButton/CustomConte
 let Pagination = (props) => {
 
   let pagesCount = Math.ceil(props.totalItemsCount / props.pageSize);
-  console.log(pagesCount);
+
 
   let pages = [];
   for (let i = 1; i <= pagesCount; i++) {

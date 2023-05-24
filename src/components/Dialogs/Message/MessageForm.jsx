@@ -1,7 +1,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
-import { addDialogsMessageActionCreator } from "../../../redux/dialogsReducer";
+import { addDialogsMessageActionCreator } from "../../../redux/dialogsReducer.ts";
 import { CustomContentButton } from "../../../UI/CustomContentButton/CustomContentButton";
 import CustomTextarea from "../../../UI/CustomTextArea/CustomTextArea";
 

@@ -1,3 +1,5 @@
+
+import { UserType } from './../Types/types';
 import { followAPI } from "../API/followAPI";
 import { getUsersAPI } from "../API/getUsersAPI";
 
@@ -12,16 +14,22 @@ const SET_SEARCH_DATA = 'social-network//users/SET_SEARCH_DATA'
 
 
 let initialState = {
-    users: [],
+    users: [] as Array<UserType>,
     pageSize: 10,
     totalUsersCount: 0,
     currentPage: 1,
     isFetching: true,
-    followingInProgress: [],
+    followingInProgress: [] as Array<number>,
     searchData: ''
+}
 
-};
-export const usersReducer = (state = initialState, action) => {
+type InitialState = typeof initialState
+
+type CommonType = FollowSuccessType | UnfollowSuccessType | SetUsersType | SetCurrentPageType 
+| SetTotalUsersCountType | ToggleIsFetchingType | ToggleFollowingProgressType | SetSearchDataType
+
+
+export const usersReducer = (state = initialState, action: CommonType):InitialState => {
     switch (action.type) {
         case FOLLOW_SUCCESS:
             return {
@@ -73,7 +81,7 @@ export const usersReducer = (state = initialState, action) => {
 }
 
 
-export const requestUsers = (searchData) => async (dispatch, getState) => {
+export const requestUsers = (searchData:string) => async (dispatch, getState) => {
     const currentPage = getState().usersPage.currentPage
     const pageSize = getState().usersPage.pageSize
     dispatch(toggleIsFetching(true));
@@ -85,7 +93,7 @@ export const requestUsers = (searchData) => async (dispatch, getState) => {
     dispatch(setTotalUsersCount(data.totalCount));
 }
 
-export const follow = (id) => async (dispatch) => {
+export const follow = (id:number) => async (dispatch) => {
     dispatch(toggleFollowingProgress(true, id))
     let data = await followAPI.followUser(id)
     if (data.resultCode === 0) {
@@ -95,7 +103,7 @@ export const follow = (id) => async (dispatch) => {
 };
 
 
-export const unfollow = (id) => async (dispatch) => {
+export const unfollow = (id:number) => async (dispatch) => {
     dispatch(toggleFollowingProgress(true, id))
     let data = await followAPI.unfollowUser(id)
     if (data.resultCode === 0) {
@@ -105,15 +113,50 @@ export const unfollow = (id) => async (dispatch) => {
 
 }
 
+type FollowSuccessType = {
+    type: typeof FOLLOW_SUCCESS
+    userId: number
+}
+type UnfollowSuccessType = {
+    type: typeof UNFOLLOW_SUCCESS
+    userId: number
+}
+type SetUsersType = {
+    type: typeof SET_USERS
+    users: Array<UserType>
+}
+type SetCurrentPageType = {
+    type: typeof SET_CURRENT_PAGE
+    currentPage: number
+}
+type SetTotalUsersCountType = {
+    type: typeof SET_TOTAL_USERS_COUNT
+    count: number
+}
+type ToggleIsFetchingType = {
+    type: typeof TOGGLE_IS_FETCHING
+    isFetching: boolean
+}
+type ToggleFollowingProgressType = {
+    type: typeof TOGGLE_IS_FOLLOWING_PROGRESS
+    isFetching:boolean
+    userId:number
+}
+type SetSearchDataType = {
+    type: typeof SET_SEARCH_DATA
+    searchData:string
+}
 
 
-export const followSuccess = (userId) => ({ type: FOLLOW_SUCCESS, userId })
-export const unfollowSuccess = (userId) => ({ type: UNFOLLOW_SUCCESS, userId })
-export const setUsers = (users) => ({ type: SET_USERS, users })
-export const setCurrentPage = (currentPage) => ({ type: SET_CURRENT_PAGE, currentPage })
-export const setTotalUsersCount = (totalUsersCount) => ({ type: SET_TOTAL_USERS_COUNT, count: totalUsersCount })
-export const toggleIsFetching = (isFetching) => ({ type: TOGGLE_IS_FETCHING, isFetching })
-export const toggleFollowingProgress = (isFetching, userId) => ({ type: TOGGLE_IS_FOLLOWING_PROGRESS, isFetching, userId })
-export const setSearchData = (searchData) => ({ type: SET_SEARCH_DATA, searchData })
+
+
+export const followSuccess = (userId:number):FollowSuccessType => ({ type: FOLLOW_SUCCESS, userId })
+export const unfollowSuccess = (userId:number):UnfollowSuccessType => ({ type: UNFOLLOW_SUCCESS, userId })
+export const setUsers = (users: Array<UserType>):SetUsersType => ({ type: SET_USERS, users })
+export const setCurrentPage = (currentPage:number):SetCurrentPageType => ({ type: SET_CURRENT_PAGE, currentPage })
+export const setTotalUsersCount = (totalUsersCount:number):SetTotalUsersCountType => ({ type: SET_TOTAL_USERS_COUNT, count: totalUsersCount })
+export const toggleIsFetching = (isFetching: boolean):ToggleIsFetchingType => ({ type: TOGGLE_IS_FETCHING, isFetching })
+export const toggleFollowingProgress = (isFetching:boolean, userId:number):ToggleFollowingProgressType => ({ type: TOGGLE_IS_FOLLOWING_PROGRESS, isFetching, userId })
+export const setSearchData = (searchData:string):SetSearchDataType => ({ type: SET_SEARCH_DATA, searchData })
 
 

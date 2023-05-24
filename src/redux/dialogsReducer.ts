@@ -1,26 +1,39 @@
 const ADD_DIALOGS_MESSAGE = 'social-network/dialogs/ADD-DIALOGS-MESSAGE'
-const UPDATE_NEW_MESSAGE_TEXT = 'social-network/dialogs/UPDATE-NEW-MESSAGE-TEXT'
 
 let initialState = {
-
     dialogs: [
         { id: 1, name: "Sasha" },
         { id: 2, name: "Anna" },
         { id: 3, name: "Kate" },
         { id: 4, name: "Max" },
         { id: 5, name: "Dasha" },
-    ],
-
+    ] as Array<DialogType>,
     messages: [
         { id: 1, message: "Hello" },
         { id: 2, message: "Its me" },
         { id: 3, message: "How is your day" },
-    ],
-
-
-
+    ] as Array<MessageType>,
 }
-export const dialogsReducer = (state = initialState, action) => {
+
+type InitialStateType = typeof initialState
+export type DialogType = {
+    id: number
+    name: string
+}
+export type MessageType = {
+    id: number
+    message: string
+}
+
+export type AddDialogsMessageActionType = {
+    type: typeof ADD_DIALOGS_MESSAGE
+    dialogsMessage: string
+}
+
+
+type CommonType = AddDialogsMessageActionType
+
+export const dialogsReducer = (state = initialState, action: CommonType): InitialStateType => {
     switch (action.type) {
 
         case ADD_DIALOGS_MESSAGE: {
@@ -35,18 +48,10 @@ export const dialogsReducer = (state = initialState, action) => {
             }
 
         }
-        case UPDATE_NEW_MESSAGE_TEXT: {
-            return {
-                ...state,
-                newMessageText: action.messageText
-            }
-
-        }
         default:
             return state
     }
 }
 
 
-export const addDialogsMessageActionCreator = (dialogsMessage) => ({ type: ADD_DIALOGS_MESSAGE, dialogsMessage })
-export const updateNewMessageTextActionCreator = (text) => ({ type: UPDATE_NEW_MESSAGE_TEXT, messageText: text })
+export const addDialogsMessageActionCreator = (dialogsMessage: string): AddDialogsMessageActionType => ({ type: ADD_DIALOGS_MESSAGE, dialogsMessage })

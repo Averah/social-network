@@ -4,7 +4,7 @@ import { CustomInput } from "../../UI/CustomInput/CustomInput";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import s from "./SearchUsers.module.css";
-import {requestUsers, setCurrentPage } from "../../redux/usersReducer";
+import {requestUsers, setCurrentPage } from "../../redux/usersReducer.ts";
 
 
 const SearchUsers = (props) => {

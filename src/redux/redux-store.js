@@ -1,13 +1,13 @@
 
 import { createStore, combineReducers, applyMiddleware, compose } from "redux";
-import { authReducer } from "./authReducer";
+import { authReducer } from "./authReducer.ts";
 import { counterReducer } from "./counterReducer";
-import { dialogsReducer } from "./dialogsReducer";
-import { profileReducer } from "./profileReducer";
-import { sidebarReducer } from "./sidebarReducer";
-import { usersReducer } from "./usersReducer";
+import { dialogsReducer } from "./dialogsReducer.ts";
+import { profileReducer } from "./profileReducer.ts";
+import { sidebarReducer } from "./sidebarReducer.ts";
+import { usersReducer } from "./usersReducer.ts";
 import thunk from "redux-thunk"
-import { appReducer } from "./appReducer";
+import { appReducer } from "./appReducer.ts";
 
 
 

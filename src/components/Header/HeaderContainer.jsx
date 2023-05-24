@@ -1,7 +1,7 @@
 import React from "react";
 import Header from "./Header";
 import { connect } from "react-redux";
-import { authorization, logOut } from "../../redux/authReducer";
+import { authorization, logOut } from "../../redux/authReducer.ts";
 
 class HeaderContainer extends React.Component {
   // componentDidMount() {

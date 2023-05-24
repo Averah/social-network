@@ -1,7 +1,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
-import { addPostActionCreator } from "../../../redux/profileReducer";
+import { addPostActionCreator } from "../../../redux/profileReducer.ts";
 import { CustomContentButton } from "../../../UI/CustomContentButton/CustomContentButton";
 import CustomTextarea from "../../../UI/CustomTextArea/CustomTextArea";
 import s from "./MyPosts.module.css";

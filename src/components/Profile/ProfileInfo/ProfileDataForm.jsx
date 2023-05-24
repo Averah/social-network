@@ -1,7 +1,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import { saveProfile, showErrorMessages } from "../../../redux/profileReducer";
+import { saveProfile, showErrorMessages } from "../../../redux/profileReducer.ts";
 import { CustomContentButton } from "../../../UI/CustomContentButton/CustomContentButton";
 import cn from "classnames";
 import s from "./ProfileInfo.module.css";
@@ -24,12 +24,9 @@ const ProfileDataForm = (props) => {
   const onCancelClick = () => {
     const deactivateEditMode = props.deactivateEditMode;
     deactivateEditMode();
-    dispatch(showErrorMessages(''))
-    
-  }
+    dispatch(showErrorMessages(""));
+  };
   const error = useSelector((state) => state.profilePage.errorMessages);
-
-
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={s.userEditingData}>

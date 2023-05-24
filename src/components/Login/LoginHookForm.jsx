@@ -1,7 +1,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import { signIn } from "../../redux/authReducer";
+import { signIn } from "../../redux/authReducer.ts";
 
 const LoginForm = () => {
   const {

@@ -10,7 +10,7 @@ import Friends from './components/Friends/Friends';
 import HeaderContainer from './components/Header/HeaderContainer';
 import LoginPage from './components/Login/LoginPage';
 import NavbarContainer from './components/Navbar/NavbarContainer';
-import { initialization } from './redux/appReducer';
+import { initialization } from './redux/appReducer.ts';
 import store from './redux/redux-store';
 const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'));
 const ProfileContainerWithHooks = React.lazy(() => import('./components/Profile/ProfileContainerWithHooks'));
@@ -23,7 +23,7 @@ const App = (props) => {
 
   useEffect(() => {
     dispatch(initialization())
-  }, [])
+  }, [dispatch])
 
   if (!isAppInitialized) {
     return <Preloader />

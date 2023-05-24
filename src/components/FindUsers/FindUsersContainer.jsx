@@ -7,10 +7,8 @@ import {
   unfollow,
   toggleFollowingProgress,
   requestUsers,
-} from "../../redux/usersReducer";
+} from "../../redux/usersReducer.ts";
 
-
-import Preloader from "../common/Preloader/Preloader";
 import { compose } from "redux";
 import {
   getCurrentPage,
