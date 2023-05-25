@@ -1,21 +1,24 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
-import { addDialogsMessageActionCreator } from "../../../redux/dialogsReducer.ts";
+import { addDialogsMessageActionCreator } from "../../../redux/dialogsReducer";
 import { CustomContentButton } from "../../../UI/CustomContentButton/CustomContentButton";
 import CustomTextarea from "../../../UI/CustomTextArea/CustomTextArea";
 
-const MessageForm = () => {
+type UserSubmitForm = {
+  dialogsMessage: string
+}
+const MessageForm:React.FC = () => {
   const {
     reset,
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({ mode: "onChange" });
+  } = useForm<UserSubmitForm>({ mode: "onChange" });
 
   const dispatch = useDispatch();
 
-  const onSubmit = (data) => {
+  const onSubmit = (data:UserSubmitForm) => {
     dispatch(addDialogsMessageActionCreator(data.dialogsMessage));
     reset();
   };
@@ -24,7 +27,6 @@ const MessageForm = () => {
     <form onSubmit={handleSubmit(onSubmit)}>
       <div>
         <CustomTextarea
-          name="dialogsMessage"
           type="textarea"
           placeholder="Enter your message"
           {...register("dialogsMessage", {

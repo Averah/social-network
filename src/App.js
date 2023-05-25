@@ -4,16 +4,15 @@ import { Route, HashRouter, Navigate, Routes } from 'react-router-dom';
 import './App.css';
 import NotFoundPage from './components/404Page/NotFoundPage';
 import Preloader from './components/common/Preloader/Preloader';
-import Counter from './components/Counter/Counter';
-import FindUsersContainer from './components/FindUsers/FindUsersContainer';
+import FindUsers from './components/FindUsers/FindUsers';
 import Friends from './components/Friends/Friends';
-import HeaderContainer from './components/Header/HeaderContainer';
 import LoginPage from './components/Login/LoginPage';
-import NavbarContainer from './components/Navbar/NavbarContainer';
 import { initialization } from './redux/appReducer.ts';
 import store from './redux/redux-store';
-const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'));
-const ProfileContainerWithHooks = React.lazy(() => import('./components/Profile/ProfileContainerWithHooks'));
+import Header from './components/Header/Header';
+import Navbar from './components/Navbar/Navbar';
+const Dialogs = React.lazy(() => import('./components/Dialogs/Dialogs'));
+const ProfileContainer = React.lazy(() => import('./components/Profile/ProfileContainer'));
 
 
 const App = (props) => {
@@ -31,22 +30,21 @@ const App = (props) => {
   return (
     <div className='app-wrapper'>
       <div className='header'>
-        <HeaderContainer />
+        <Header />
       </div>
       <div className='flex-container'>
       <div className='navigation'>
-        <NavbarContainer />
+        <Navbar />
       </div>
       <div className='content'>
         <Suspense fallback={<Preloader />}>
           <Routes>
             <Route path="/" element={<Navigate to="/profile" />} />
             <Route path="*" element={<NotFoundPage />} />
-            <Route path='/profile/:userId?' element={<ProfileContainerWithHooks />} />
-            <Route path='/dialogs/:userId?' element={<DialogsContainer />} />
+            <Route path='/profile/:userId?' element={<ProfileContainer />} />
+            <Route path='/dialogs/:userId?' element={<Dialogs />} />
             <Route path='/friends' element={<Friends />} />
-            <Route path='/users' element={<FindUsersContainer />} />
-            <Route path='/counter' element={<Counter />} />
+            <Route path='/users' element={<FindUsers />} />
             <Route path='/login' element={<LoginPage />} />
           </Routes>
         </Suspense>

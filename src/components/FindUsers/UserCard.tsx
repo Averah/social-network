@@ -3,31 +3,39 @@ import React from "react";
 import { CustomContentButton } from "../../UI/CustomContentButton/CustomContentButton";
 import defaultAvatar from "./../../images/DefaultAvatar/defaultAvatar.png";
 import s from "./UserCard.module.css";
+import { UserType } from '../../Types/types';
 
-let UserCard = (props) => {
+type PropsType = {
+  user: UserType
+  followingInProgress: Array<number>
+  follow: (id:number) => void 
+  unfollow: (id:number) => void
+}
+
+let UserCard:React.FC<PropsType> = ({user, followingInProgress, follow, unfollow}) => {
   return (
-    <div key={props.u.id} className={s.userCard}>
+    <div key={user.id} className={s.userCard}>
       <div>
         <img
           src={
-            props.u.photos.small != null ? props.u.photos.small : defaultAvatar
+            user.photos.small != null ? user.photos.small : defaultAvatar
           }
           className={s.userPhoto}
           alt="avatar"
         />
       </div>
-      <div>{props.u.name}</div>
-      <div>{props.u.status ? props.u.status : "No Status"}</div>
+      <div>{user.name}</div>
+      <div>{user.status ? user.status : "No Status"}</div>
       <div>Country:</div>
       <div>City:</div>
       <div>
-        {props.u.followed ? (
+        {user.followed ? (
           <CustomContentButton
             className={s.followingButton}
-            disabled={props.followingInProgress.some((id) => id === props.u.id)}
+            disabled={followingInProgress.some((id) => id === user.id)}
             onClick={(event) => {
               event.preventDefault();
-              props.unfollow(props.u.id);
+              unfollow(user.id);
             }}
           >
             Unfollow
@@ -35,10 +43,10 @@ let UserCard = (props) => {
         ) : (
           <CustomContentButton
             className={s.followingButton}
-            disabled={props.followingInProgress.some((id) => id === props.u.id)}
+            disabled={followingInProgress.some((id) => id === user.id)}
             onClick={(event) => {
               event.preventDefault();
-              props.follow(props.u.id);
+              follow(user.id);
             }}
           >
             Follow

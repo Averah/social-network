@@ -3,16 +3,16 @@
 
 let initialState = {
     friends: [
-        { id: 1, friend: 'Sasha' },
-        { id: 2, friend: 'Anna' },
-        { id: 3, friend: 'Kate' }
-    ] as Array<FrindType>
+        { id: 1, name: 'Sasha' },
+        { id: 2, name: 'Anna' },
+        { id: 3, name: 'Kate' }
+    ] as Array<FriendType>
 }
 
 export type InitialStateType = typeof initialState
-export type FrindType = {
+export type FriendType = {
     id: number
-    friend: string
+    name: string
 }
 
 export const sidebarReducer = (state = initialState, action:any): InitialStateType => {

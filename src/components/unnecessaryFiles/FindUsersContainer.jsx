@@ -19,7 +19,7 @@ import {
   getTotalUsersCount,
   getUsers,
 } from "../../redux/users-selectors";
-import FindUsers from "./FindUsers";
+import FindUsers from "../FindUsers/FindUsers";
 
 class FindUsersContainer extends React.Component {
   componentDidMount() {
@@ -36,7 +36,6 @@ class FindUsersContainer extends React.Component {
       <>
         <FindUsers
           totalUsersCount={this.props.totalUsersCount}
-          // setTotalUsersCount={this.props.setTotalUsersCount}
           pageSize={this.props.pageSize}
           currentPage={this.props.currentPage}
           onPageChanged={this.onPageChanged}

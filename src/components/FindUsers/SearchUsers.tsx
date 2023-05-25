@@ -4,17 +4,22 @@ import { CustomInput } from "../../UI/CustomInput/CustomInput";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import s from "./SearchUsers.module.css";
-import {requestUsers, setCurrentPage } from "../../redux/usersReducer.ts";
+import {requestUsers, setCurrentPage } from "../../redux/usersReducer";
 
 
-const SearchUsers = (props) => {
-  const { register, handleSubmit } = useForm({
+const SearchUsers:React.FC = () => {
+
+  type UserSubmitForm = {
+    searchInput: string
+  }
+  
+  const { register, handleSubmit } = useForm<UserSubmitForm>({
     mode: "onBlur",
   });
 
   const dispatch = useDispatch();
 
-  const onSubmit = (data) => {
+  const onSubmit = (data:UserSubmitForm) => {
     const searchData = data.searchInput
     dispatch(setCurrentPage(1))
     dispatch(requestUsers(searchData))
@@ -29,7 +34,6 @@ const SearchUsers = (props) => {
           id="searchInput"
           type="text"
           placeholder='Search users by name...'
-          name="searchInput"
           {...register("searchInput")}
         />
       </div>

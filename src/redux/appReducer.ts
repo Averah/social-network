@@ -1,5 +1,4 @@
-// @ts-ignore
-import { authorization } from "./authReducer.ts";
+import { authorization } from "./authReducer";
 
 const INITIALIZED_SUCCESS = 'social-network/app/INITIALIZED_SUCCESS'
 

@@ -81,13 +81,13 @@ export const usersReducer = (state = initialState, action: CommonType):InitialSt
 }
 
 
-export const requestUsers = (searchData:string) => async (dispatch, getState) => {
+export const requestUsers = (searchData?:string) => async (dispatch, getState) => {
     const currentPage = getState().usersPage.currentPage
     const pageSize = getState().usersPage.pageSize
     dispatch(toggleIsFetching(true));
     let data = await getUsersAPI(currentPage, pageSize, searchData)
     dispatch(setCurrentPage(currentPage))
-    dispatch(setSearchData(searchData))
+    searchData && dispatch(setSearchData(searchData))
     dispatch(toggleIsFetching(false));
     dispatch(setUsers(data.items));
     dispatch(setTotalUsersCount(data.totalCount));

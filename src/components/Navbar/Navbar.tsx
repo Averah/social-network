@@ -1,9 +1,14 @@
 
+import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import s from "./Navbar.module.css";
 import Sidebar from "./Sidebar/Sidebar";
+import { AppStateType } from '../../redux/redux-store';
+import React from "react";
 
-const Navbar = (props) => {
+const Navbar:React.FC = () => {
+
+  const friends = useSelector((state: AppStateType) => state.sidebar.friends)
   
   return (
     <nav className={s.nav}>
@@ -42,7 +47,7 @@ const Navbar = (props) => {
           Settings
         </NavLink>
       </div>
-      <Sidebar sidebar={props.sidebar}/>
+      <Sidebar friends={friends}/>
      
     </nav>
   );
