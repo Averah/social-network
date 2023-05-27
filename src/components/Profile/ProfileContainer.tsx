@@ -6,16 +6,30 @@ import {
   getUsersStatus,
   updateUsersStatus,
   savePhoto,
-} from "../../redux/profileReducer.ts";
-
+} from "../../redux/profileReducer";
 import { useParams } from "react-router-dom";
 import { withAuthRedirect } from "../HOC/withAuthRedirect";
 import { compose } from "redux";
 
-export const ProfileContainerWithHooks = (props) => {
+import { AppStateType } from '../../redux/redux-store';
+
+type MapPropsType = ReturnType<typeof mapStateToProps>
+
+type MapDispatchPropsType = {
+  getUsersProfile: (userId: number) => void
+  getUsersStatus: (userId: number) => void
+  updateUsersStatus: (status: string) => void
+  savePhoto: (file: File) => void
+}
+
+
+
+type PropsType = MapPropsType & MapDispatchPropsType & PathParamsType
+
+export const ProfileContainerWithHooks:React.FC<PropsType> = (props) => {
   const params = useParams();
   useEffect(() => {
-    let userId = params.userId;
+    let userId = params.userId ? +params.userId : null;
     if (!userId) {
       userId = props.authorizedUserId;
     }
@@ -40,7 +54,7 @@ export const ProfileContainerWithHooks = (props) => {
   );
 };
 
-let mapStateToProps = (state) => {
+let mapStateToProps = (state: AppStateType) => {
   return {
     profile: state.profilePage.profile,
     status: state.profilePage.status,
@@ -49,7 +63,7 @@ let mapStateToProps = (state) => {
   };
 };
 
-export default compose(
+export default compose<React.ComponentType>(
   connect(mapStateToProps, {
     getUsersProfile,
     getUsersStatus,

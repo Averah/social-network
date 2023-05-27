@@ -14,7 +14,7 @@ export type InitializedSuccessActionType = {
     type: typeof INITIALIZED_SUCCESS
 }
 
-export const appReducer = (state = initialState, action: any):InitialStateType => {
+export const appReducer = (state = initialState, action: InitializedSuccessActionType):InitialStateType => {
     switch (action.type) {
         case INITIALIZED_SUCCESS:
             return {

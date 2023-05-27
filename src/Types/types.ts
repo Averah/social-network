@@ -8,6 +8,7 @@ export type ContactType = {
     youtube: string
     mainLink: string
 }
+
 export type PhotosType = {
     small: string | null
     large: string | null
@@ -19,6 +20,7 @@ export type ProfileType = {
     fullName: string | null
     contacts: ContactType
     photos: PhotosType
+    aboutMe: string
 
 }
 
@@ -36,4 +38,8 @@ export type UserType = {
     followed: boolean
     country?: string
     city?: string
+}
+
+export type ErrorType = {
+    error: string | null
 }

@@ -1,8 +1,19 @@
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
-import MyPostsContainer from "./Posts/MyPostsContainer";
+import { withAuthRedirect } from "../HOC/withAuthRedirect";
 import s from "./Profile.module.css";
+import React from 'react'
+import MyPostsMemorized from './Posts/MyPosts';
+import { ProfileType } from '../../Types/types';
 
-const Profile = (props) => {
+type PropsType = {
+    profile: ProfileType
+    status: string
+    isOwner:boolean
+    updateUsersStatus: () => void
+    savePhoto: () => void
+}
+
+const Profile:React.FC<PropsType> = (props) => {
   return (
     <div className={s.profileContent}>
       <div className={s.profileInfo}>
@@ -15,10 +26,10 @@ const Profile = (props) => {
         />
       </div>
       <div className={s.profilePosts}>
-        <MyPostsContainer store={props.store} />
+        <MyPostsMemorized store={props.store} />
       </div>
     </div>
   );
 };
 
-export default Profile;
+export default withAuthRedirect(Profile);

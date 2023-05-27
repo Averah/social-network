@@ -2,6 +2,7 @@ import { authAPI } from "../API/authAPI";
 import { loginAPI } from "../API/loginAPI";
 import { logOutAPI } from "../API/logOutAPI";
 import { securityAPI } from "../API/securityAPI";
+import { ErrorType } from '../Types/types';
 
 const SET_USER_DATA = 'social-network/auth/SET_USER_DATA'
 const SET_LOGIN_DATA = 'social-network/auth/SET_LOGIN_DATA'
@@ -14,9 +15,9 @@ let initialState =  {
     email: null as null | string,
     login: null as null | string,
     isAuth: false,
-    errorMessages: null as null | string,
-    captchaURL: null as null | string
-};
+    errorMessages: null as null | Array<ErrorType>,
+    captchaURL: null as null | string,
+}
 
 export type InitialStateType = typeof initialState
 

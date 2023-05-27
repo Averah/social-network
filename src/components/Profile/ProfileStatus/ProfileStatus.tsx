@@ -1,11 +1,19 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
+// @ts-ignore
 import { CustomInput } from "../../../UI/CustomInput/CustomInput";
 
 
-const ProfileStatusWithHooks = (props) => {
+type PropsType = {
+  status: string
+  isOwner: boolean
+  updateUsersStatus: (status:string) => void
+}
+
+
+const ProfileStatus:React.FC<PropsType> = (props) => {
   let [editMode, setEditMode] = useState(false);
-  let [status, setStatus] = useState(props.status);
+  let [status, setStatus] = useState<string>(props.status);
 
   useEffect(() => {
     setStatus(props.status);
@@ -22,7 +30,7 @@ const ProfileStatusWithHooks = (props) => {
     props.updateUsersStatus(status);
   };
 
-  const onStatusChange = (e) => {
+  const onStatusChange = (e:React.FormEvent<HTMLInputElement>) => {
     setStatus(e.currentTarget.value);
   };
 
@@ -43,4 +51,4 @@ const ProfileStatusWithHooks = (props) => {
   );
 };
 
-export default ProfileStatusWithHooks;
+export default ProfileStatus;

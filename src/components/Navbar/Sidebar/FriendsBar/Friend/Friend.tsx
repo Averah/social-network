@@ -1,4 +1,5 @@
 import s from "./Friend.module.css";
+// @ts-ignore
 import defaultAvatar from './../../../../../images/DefaultAvatar/defaultAvatar.png'
 import React from "react";
 

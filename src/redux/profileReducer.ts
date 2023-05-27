@@ -1,5 +1,6 @@
 import { ProfileType, PhotosType, PostType } from './../Types/types';
 import { profileAPI } from "../API/profileAPI"
+import { ErrorType } from '../Types/types';
 
 const ADD_POST = 'social-network/profile/ADD-POST'
 const SET_USER_PROFILE = 'social-network/profile/SET-USER-PROFILE'
@@ -16,7 +17,7 @@ let initialState = {
         { id: 3, message: "It is my second post", likes: "20 likes" },] as Array<PostType>,
     profile: null as ProfileType | null,
     status: '',
-    errorMessages: '',
+    errorMessages: null as null | Array<ErrorType>
 }
 type InitialStateType = typeof initialState
 

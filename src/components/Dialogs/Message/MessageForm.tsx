@@ -27,7 +27,6 @@ const MessageForm:React.FC = () => {
     <form onSubmit={handleSubmit(onSubmit)}>
       <div>
         <CustomTextarea
-          type="textarea"
           placeholder="Enter your message"
           {...register("dialogsMessage", {
             required: "You cannot send an empty message",

@@ -1,7 +1,15 @@
+// @ts-ignore
 import defaultAvatar from "../../../../images/DefaultAvatar/defaultAvatar.png";
 import s from "./Post.module.css";
+import React from 'react'
 
-const Post = (props) => {
+type PropsType = {
+  message: string | null
+  likes: string | null
+  key: number | null
+}
+
+const Post:React.FC<PropsType> = (props) => {
   return (
     <div className={s.item}>
       <img src={defaultAvatar} className={s.avatar} alt='user avatar'></img>

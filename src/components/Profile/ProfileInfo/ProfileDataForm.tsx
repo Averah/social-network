@@ -1,20 +1,33 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import { saveProfile, showErrorMessages } from "../../../redux/profileReducer.ts";
+import { saveProfile, showErrorMessages } from "../../../redux/profileReducer";
 import { CustomContentButton } from "../../../UI/CustomContentButton/CustomContentButton";
 import cn from "classnames";
 import s from "./ProfileInfo.module.css";
+import { ProfileType, ContactType, ErrorType } from '../../../Types/types';
+import { AppStateType } from '../../../redux/redux-store';
 
-const ProfileDataForm = (props) => {
-  const { register, handleSubmit } = useForm({
+
+type PropsType = {
+  profile: ProfileType
+  deactivateEditMode: () => void
+}
+
+interface UserSubmitHandle extends ProfileType {
+  error: null | Array<ErrorType>
+}
+
+
+const ProfileDataForm:React.FC<PropsType> = (props) => {
+  const { register, handleSubmit } = useForm<UserSubmitHandle>({
     mode: "onBlur",
     defaultValues: props.profile,
   });
 
   const dispatch = useDispatch();
 
-  const onSubmit = async (data) => {
+  const onSubmit = async (data:UserSubmitHandle) => {
     const serverResponseMessage = await dispatch(saveProfile(data));
     if (serverResponseMessage === "success") {
       props.deactivateEditMode();
@@ -22,11 +35,10 @@ const ProfileDataForm = (props) => {
   };
 
   const onCancelClick = () => {
-    const deactivateEditMode = props.deactivateEditMode;
-    deactivateEditMode();
+    props.deactivateEditMode();
     dispatch(showErrorMessages(""));
   };
-  const error = useSelector((state) => state.profilePage.errorMessages);
+  const error = useSelector((state: AppStateType) => state.profilePage.errorMessages);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={s.userEditingData}>
@@ -37,7 +49,6 @@ const ProfileDataForm = (props) => {
         <input
           id="fullName"
           type="text"
-          name="fullName"
           {...register("fullName")}
         />
       </div>
@@ -48,7 +59,6 @@ const ProfileDataForm = (props) => {
         <input
           type="text"
           id="aboutMe"
-          name="aboutMe"
           {...register("aboutMe")}
         />
       </div>
@@ -57,7 +67,6 @@ const ProfileDataForm = (props) => {
         <input
           type="checkbox"
           id="lookingForAJob"
-          name="checkbox"
           {...register("lookingForAJob")}
         />
         <label htmlFor="true"></label>
@@ -70,7 +79,6 @@ const ProfileDataForm = (props) => {
         </div>
         <input
           type="textarea"
-          name="lookingForAJobDescription"
           id="lookingForAJobDescription"
           {...register("lookingForAJobDescription")}
         />
@@ -82,8 +90,7 @@ const ProfileDataForm = (props) => {
           </div>
           <input
             type="text"
-            name={`contacts.${key}`}
-            {...register(`contacts.${key}`)}
+            {...register(`contacts.${key as keyof ContactType}`)}
           />
         </div>
       ))}

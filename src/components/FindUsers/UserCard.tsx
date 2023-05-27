@@ -33,7 +33,7 @@ let UserCard:React.FC<PropsType> = ({user, followingInProgress, follow, unfollow
           <CustomContentButton
             className={s.followingButton}
             disabled={followingInProgress.some((id) => id === user.id)}
-            onClick={(event) => {
+            onClick={(event: React.MouseEvent<HTMLButtonElement>) => {
               event.preventDefault();
               unfollow(user.id);
             }}
@@ -44,7 +44,7 @@ let UserCard:React.FC<PropsType> = ({user, followingInProgress, follow, unfollow
           <CustomContentButton
             className={s.followingButton}
             disabled={followingInProgress.some((id) => id === user.id)}
-            onClick={(event) => {
+            onClick={(event: React.MouseEvent<HTMLButtonElement>) => {
               event.preventDefault();
               follow(user.id);
             }}

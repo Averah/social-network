@@ -1,12 +1,17 @@
+import React from 'react'
 import { forwardRef } from 'react';
-
 import s from "./CustomTextArea.module.css";
 
- const CustomTextarea = forwardRef((props, ref) => {
+type PropsType = React.TextareaHTMLAttributes<HTMLTextAreaElement> & {
+  customError?: string | null
+}
+export type Ref = HTMLTextAreaElement;
+
+ const CustomTextarea = forwardRef<Ref, PropsType>((props, ref) => {
     const {customError, ...otherProps} = props;
     return (
       <div>
-        <textarea {...otherProps} ref={ref} className={s.customTextarea}/>
+        <textarea {...otherProps} ref={ref} className={s.customTextarea} />
         {customError && (
         <div className={s.errorMessage}>
           {customError}

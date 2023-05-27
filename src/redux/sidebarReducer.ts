@@ -15,7 +15,7 @@ export type FriendType = {
     name: string
 }
 
-export const sidebarReducer = (state = initialState, action:any): InitialStateType => {
+export const sidebarReducer = (state = initialState, action:FriendType): InitialStateType => {
     return state
 }
 
