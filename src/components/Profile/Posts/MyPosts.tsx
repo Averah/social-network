@@ -7,7 +7,6 @@ import { AppStateType } from '../../../redux/redux-store';
 
 
 
-
 const MyPosts:React.FC = () => {
   const posts = useSelector((state: AppStateType) => state.profilePage.posts)
   let postsElements = posts.map(post => (

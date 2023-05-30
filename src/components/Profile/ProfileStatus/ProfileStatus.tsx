@@ -13,7 +13,7 @@ type PropsType = {
 
 const ProfileStatus:React.FC<PropsType> = (props) => {
   let [editMode, setEditMode] = useState(false);
-  let [status, setStatus] = useState<string>(props.status);
+  let [status, setStatus] = useState(props.status);
 
   useEffect(() => {
     setStatus(props.status);

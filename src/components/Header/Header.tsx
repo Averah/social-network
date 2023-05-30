@@ -6,9 +6,12 @@ import { logOut} from '../../redux/authReducer';
 import { AppStateType } from '../../redux/redux-store';
 import React from "react";
 
+
+
 const Header:React.FC = () => {
   const isAuth = useSelector((state: AppStateType) => state.auth.isAuth)
   const dispatch = useDispatch()
+
   const logUserOut = () => {
     dispatch(logOut())
   }

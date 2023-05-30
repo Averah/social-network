@@ -16,17 +16,20 @@ import { AppStateType } from '../../redux/redux-store';
 type MapPropsType = ReturnType<typeof mapStateToProps>
 
 type MapDispatchPropsType = {
-  getUsersProfile: (userId: number) => void
-  getUsersStatus: (userId: number) => void
+  getUsersProfile: (userId: number | null) => void
+  getUsersStatus: (userId: number | null) => void
   updateUsersStatus: (status: string) => void
   savePhoto: (file: File) => void
 }
 
+type PathParamsType = {
+  userId: number | null
+}
 
 
 type PropsType = MapPropsType & MapDispatchPropsType & PathParamsType
 
-export const ProfileContainerWithHooks:React.FC<PropsType> = (props) => {
+export const ProfileContainer:React.FC<PropsType> = (props) => {
   const params = useParams();
   useEffect(() => {
     let userId = params.userId ? +params.userId : null;
@@ -71,4 +74,4 @@ export default compose<React.ComponentType>(
     savePhoto,
   }),
   withAuthRedirect
-)(ProfileContainerWithHooks);
+)(ProfileContainer);

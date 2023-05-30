@@ -1,6 +1,3 @@
-
-
-
 let initialState = {
     friends: [
         { id: 1, name: 'Sasha' },
@@ -15,7 +12,9 @@ export type FriendType = {
     name: string
 }
 
-export const sidebarReducer = (state = initialState, action:FriendType): InitialStateType => {
+
+
+export const sidebarReducer = (state = initialState, action:any): InitialStateType => {
     return state
 }
 

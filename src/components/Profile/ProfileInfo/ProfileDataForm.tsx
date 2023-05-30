@@ -5,8 +5,8 @@ import { saveProfile, showErrorMessages } from "../../../redux/profileReducer";
 import { CustomContentButton } from "../../../UI/CustomContentButton/CustomContentButton";
 import cn from "classnames";
 import s from "./ProfileInfo.module.css";
-import { ProfileType, ContactType, ErrorType } from '../../../Types/types';
-import { AppStateType } from '../../../redux/redux-store';
+import { ProfileType, ContactType } from '../../../Types/types';
+import { AppStateType, AppDispatch } from '../../../redux/redux-store';
 
 
 type PropsType = {
@@ -15,19 +15,19 @@ type PropsType = {
 }
 
 interface UserSubmitHandle extends ProfileType {
-  error: null | Array<ErrorType>
+  error: null | string[]
 }
 
 
-const ProfileDataForm:React.FC<PropsType> = (props) => {
+const ProfileDataForm: React.FC<PropsType> = (props) => {
   const { register, handleSubmit } = useForm<UserSubmitHandle>({
     mode: "onBlur",
     defaultValues: props.profile,
   });
 
-  const dispatch = useDispatch();
+  const dispatch: AppDispatch = useDispatch();
 
-  const onSubmit = async (data:UserSubmitHandle) => {
+  const onSubmit = async (data: UserSubmitHandle) => {
     const serverResponseMessage = await dispatch(saveProfile(data));
     if (serverResponseMessage === "success") {
       props.deactivateEditMode();
@@ -36,9 +36,11 @@ const ProfileDataForm:React.FC<PropsType> = (props) => {
 
   const onCancelClick = () => {
     props.deactivateEditMode();
-    dispatch(showErrorMessages(""));
+    dispatch(showErrorMessages(null));
   };
-  const error = useSelector((state: AppStateType) => state.profilePage.errorMessages);
+
+  let error = useSelector((state: AppStateType) => state.profilePage.errorMessages);
+
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={s.userEditingData}>
@@ -96,7 +98,7 @@ const ProfileDataForm:React.FC<PropsType> = (props) => {
       ))}
       <div>
         {error && (
-          <p style={{ color: "red" }}>{error.join(", ") || "Error!"}</p>
+          <p style={{ color: "red" }}>{error?.join(", ") || "Error!"}</p>
         )}
       </div>
       <CustomContentButton type="submit">Save changes</CustomContentButton>

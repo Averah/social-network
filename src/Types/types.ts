@@ -14,7 +14,7 @@ export type PhotosType = {
     large: string | null
 }
 export type ProfileType = {
-    userId: number | null
+    userId: number
     lookingForAJob: boolean
     lookingForAJobDescription: string | null
     fullName: string | null
@@ -41,5 +41,5 @@ export type UserType = {
 }
 
 export type ErrorType = {
-    error: string | null
+    error: null | string
 }

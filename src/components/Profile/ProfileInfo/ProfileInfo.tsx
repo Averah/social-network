@@ -1,6 +1,6 @@
 import React from "react";
 import Preloader from "../../common/Preloader/Preloader";
-import ProfileStatusWithHooks from "../ProfileStatus/ProfileStatus";
+import ProfileStatus from "../ProfileStatus/ProfileStatus";
 import defaultAvatar from "../../../images/DefaultAvatar/defaultAvatar.png";
 import s from "./ProfileInfo.module.css";
 import ProfileDataForm from "./ProfileDataForm";
@@ -12,7 +12,7 @@ import { ProfileType } from '../../../Types/types';
 
 
 type PropsType = {
-  profile: ProfileType
+  profile: ProfileType | null
   isOwner: boolean
   status: string
   savePhoto: (file: File) => void
@@ -65,7 +65,7 @@ const ProfileInfo:React.FC<PropsType> = (props) => {
           </div>
         )}
         <div className={s.userStatus}>
-          <ProfileStatusWithHooks
+          <ProfileStatus
             status={props.status}
             updateUsersStatus={props.updateUsersStatus}
             isOwner={props.isOwner}

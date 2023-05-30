@@ -1,3 +1,4 @@
+
 const ADD_DIALOGS_MESSAGE = 'social-network/dialogs/ADD-DIALOGS-MESSAGE'
 
 let initialState = {
@@ -31,9 +32,10 @@ export type AddDialogsMessageActionType = {
 }
 
 
-type CommonType = AddDialogsMessageActionType
+export type DialogsActionTypes = AddDialogsMessageActionType
 
-export const dialogsReducer = (state = initialState, action: CommonType): InitialStateType => {
+
+export const dialogsReducer = (state = initialState, action: DialogsActionTypes): InitialStateType => {
     switch (action.type) {
 
         case ADD_DIALOGS_MESSAGE: {

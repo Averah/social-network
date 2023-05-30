@@ -1,16 +1,16 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import { signIn } from "../../redux/authReducer"
+import { signIn} from '../../redux/authReducer';
 import { AppStateType } from '../../redux/redux-store';
-import { ErrorType } from '../../Types/types';
+
 
 type UserSubmitType = {
   email: string
-  password: String
+  password: string
   rememberMe: boolean
-  captcha: string | null
-  error: null | Array<ErrorType>
+  captcha?: string
+  error?: Array<string>
 }
 
 const LoginForm:React.FC = () => {
@@ -64,7 +64,7 @@ const LoginForm:React.FC = () => {
         <label htmlFor="rememberMe">Remember me</label>
       </div>
       <div>
-        <p style={{ color: "red" }}>{error?.join()}</p>
+        <p style={{ color: "red" }}>{error}</p>
       </div>
       {captchaURL && (
         <div>
