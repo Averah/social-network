@@ -1,9 +1,9 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import { useDispatch, useSelector } from "react-redux";
-import { signIn} from '../../redux/authReducer';
-import { AppStateType } from '../../redux/redux-store';
-
+import { useSelector } from "react-redux";
+import { useAppDispatch } from "../../Hooks/useAppDispatch";
+import { signIn } from '../../redux/authReducer';
+import { AppStateType} from '../../redux/redux-store';
 
 type UserSubmitType = {
   email: string
@@ -13,20 +13,20 @@ type UserSubmitType = {
   error?: Array<string>
 }
 
-const LoginForm:React.FC = () => {
+const LoginForm: React.FC = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<UserSubmitType>({ mode: "onBlur" });
 
-  const dispatch = useDispatch();
-
-  const onSubmit = (data:UserSubmitType) => {
+  const dispatch = useAppDispatch()
+  const onSubmit = (data: UserSubmitType) => {
     dispatch(signIn(data));
   };
-  const error = useSelector((state:AppStateType) => state.auth.errorMessages);
-  const captchaURL = useSelector((state:AppStateType) => state.auth.captchaURL);
+  
+  const error = useSelector((state: AppStateType) => state.auth.errorMessages);
+  const captchaURL = useSelector((state: AppStateType) => state.auth.captchaURL);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>

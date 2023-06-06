@@ -9,7 +9,7 @@ type PropsType = {
   key: number | null
 }
 
-const Post:React.FC<PropsType> = (props) => {
+const Post: React.FC<PropsType> = (props) => {
   return (
     <div className={s.item}>
       <img src={defaultAvatar} className={s.avatar} alt='user avatar'></img>

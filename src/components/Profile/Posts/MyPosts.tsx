@@ -5,9 +5,7 @@ import AddPostForm from "./AddPostForm";
 import { useSelector } from 'react-redux';
 import { AppStateType } from '../../../redux/redux-store';
 
-
-
-const MyPosts:React.FC = () => {
+const MyPosts: React.FC = () => {
   const posts = useSelector((state: AppStateType) => state.profilePage.posts)
   let postsElements = posts.map(post => (
     <Post message={post.message} likes={post.likes} key={post.id} />

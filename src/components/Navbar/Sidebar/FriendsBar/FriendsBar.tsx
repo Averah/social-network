@@ -7,17 +7,15 @@ type PropsType = {
   friends: Array<FriendType>
 }
 
-const FriendsBar:React.FC<PropsType> = ({friends}) => {
-  let friendsList = friends.map((friend) => 
-  <Friend friend={friend.name} key={friend.id}/>);
-  
+const FriendsBar: React.FC<PropsType> = ({ friends }) => {
+  let friendsList = friends.map((friend) =>
+    <Friend friend={friend.name} key={friend.id} />);
   return (
-
     <div className={s.friendsBar}>
       <div className={s.posts}>{friendsList}</div>
     </div>
   )
-   
+
 }
 
 export default FriendsBar;

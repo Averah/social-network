@@ -3,15 +3,13 @@ import { useEffect } from "react";
 // @ts-ignore
 import { CustomInput } from "../../../UI/CustomInput/CustomInput";
 
-
 type PropsType = {
   status: string
   isOwner: boolean
-  updateUsersStatus: (status:string) => void
+  updateUsersStatus: (status: string) => void
 }
 
-
-const ProfileStatus:React.FC<PropsType> = (props) => {
+const ProfileStatus: React.FC<PropsType> = (props) => {
   let [editMode, setEditMode] = useState(false);
   let [status, setStatus] = useState(props.status);
 
@@ -30,7 +28,7 @@ const ProfileStatus:React.FC<PropsType> = (props) => {
     props.updateUsersStatus(status);
   };
 
-  const onStatusChange = (e:React.FormEvent<HTMLInputElement>) => {
+  const onStatusChange = (e: React.FormEvent<HTMLInputElement>) => {
     setStatus(e.currentTarget.value);
   };
 
@@ -44,10 +42,10 @@ const ProfileStatus:React.FC<PropsType> = (props) => {
       />
     </div>
   ) : (
-     <div onClick={activateEditMode}>
+    <div onClick={activateEditMode}>
       <span>Status: </span>{props.status}
-   </div>
-   
+    </div>
+
   );
 };
 

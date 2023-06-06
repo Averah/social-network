@@ -1,5 +1,5 @@
 import React, { Suspense, useEffect } from 'react';
-import { useDispatch, useSelector, Provider } from "react-redux";
+import {useSelector, Provider } from "react-redux";
 import { Route, HashRouter, Navigate, Routes } from 'react-router-dom';
 import './App.css';
 import NotFoundPage from './components/404Page/NotFoundPage';
@@ -7,18 +7,18 @@ import Preloader from './components/common/Preloader/Preloader';
 import FindUsers from './components/FindUsers/FindUsers';
 import Friends from './components/Friends/Friends';
 import LoginPage from './components/Login/LoginPage';
-import { initialization } from './redux/appReducer.ts';
-import store from './redux/redux-store';
+import { initialization } from './redux/appReducer';
+import store, { AppStateType } from './redux/redux-store';
 import Header from './components/Header/Header';
 import Navbar from './components/Navbar/Navbar';
+import { useAppDispatch } from './Hooks/useAppDispatch';
 const Dialogs = React.lazy(() => import('./components/Dialogs/Dialogs'));
 const ProfileContainer = React.lazy(() => import('./components/Profile/ProfileContainer'));
 
 
-const App = (props) => {
-
-  const dispatch = useDispatch()
-  const isAppInitialized = useSelector(state => state.app.initialized)
+const App:React.FC = () => {
+  const dispatch = useAppDispatch()
+  const isAppInitialized = useSelector((state: AppStateType) => state.app.initialized)
 
   useEffect(() => {
     dispatch(initialization())
@@ -54,7 +54,7 @@ const App = (props) => {
   );
 }
 
-const SocialNetworkApp = (props) => {
+const SocialNetworkApp:React.FC = () => {
   return <HashRouter>
     <Provider store={store}>
       <App />

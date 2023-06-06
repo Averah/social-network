@@ -10,7 +10,6 @@ import {
 import { useParams } from "react-router-dom";
 import { withAuthRedirect } from "../HOC/withAuthRedirect";
 import { compose } from "redux";
-
 import { AppStateType } from '../../redux/redux-store';
 
 type MapPropsType = ReturnType<typeof mapStateToProps>
@@ -26,10 +25,9 @@ type PathParamsType = {
   userId: number | null
 }
 
-
 type PropsType = MapPropsType & MapDispatchPropsType & PathParamsType
 
-export const ProfileContainer:React.FC<PropsType> = (props) => {
+export const ProfileContainer: React.FC<PropsType> = (props) => {
   const params = useParams();
   useEffect(() => {
     let userId = params.userId ? +params.userId : null;

@@ -7,12 +7,7 @@ import MessageForm from "./Message/MessageForm";
 import { withAuthRedirect } from "../HOC/withAuthRedirect";
 import { AppStateType } from '../../redux/redux-store';
 
-interface DialogsPropsType {
-  profileName: string;
-}
-
-
-const Dialogs: React.FC<DialogsPropsType> = () => {
+const Dialogs: React.FC = () => {
   const dialogs = useSelector((state: AppStateType) => state.dialogsPage.dialogs)
   const messages = useSelector((state: AppStateType) => state.dialogsPage.messages)
 

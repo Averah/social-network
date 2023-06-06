@@ -6,14 +6,14 @@ import MyPostsMemorized from './Posts/MyPosts';
 import { ProfileType } from '../../Types/types';
 
 type PropsType = {
-    profile: ProfileType | null
-    status: string
-    isOwner:boolean
-    updateUsersStatus: (status: string) => void
-    savePhoto: (file: File) => void
+  profile: ProfileType | null
+  status: string
+  isOwner: boolean
+  updateUsersStatus: (status: string) => void
+  savePhoto: (file: File) => void
 }
 
-const Profile:React.FC<PropsType> = (props) => {
+const Profile: React.FC<PropsType> = (props) => {
   return (
     <div className={s.profileContent}>
       <div className={s.profileInfo}>

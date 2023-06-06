@@ -2,30 +2,29 @@ import React from "react";
 import { CustomContentButton } from "../../UI/CustomContentButton/CustomContentButton";
 import { CustomInput } from "../../UI/CustomInput/CustomInput";
 import { useForm } from "react-hook-form";
-import { useDispatch } from "react-redux";
 import s from "./SearchUsers.module.css";
-import {requestUsers, setCurrentPage } from "../../redux/usersReducer";
+import { requestUsers, actions } from '../../redux/usersReducer';
+import { useAppDispatch } from '../../Hooks/useAppDispatch';
 
 
-const SearchUsers:React.FC = () => {
+const SearchUsers: React.FC = () => {
 
   type UserSubmitForm = {
     searchInput: string
   }
-  
+
   const { register, handleSubmit } = useForm<UserSubmitForm>({
     mode: "onBlur",
-  });
+  })
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch()
 
-  const onSubmit = (data:UserSubmitForm) => {
+  const onSubmit = (data: UserSubmitForm) => {
     const searchData = data.searchInput
-    dispatch(setCurrentPage(1))
+    dispatch(actions.setCurrentPage(1))
     dispatch(requestUsers(searchData))
 
-  };
-
+  }
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={s.searchUsersForm}>
@@ -37,10 +36,10 @@ const SearchUsers:React.FC = () => {
           {...register("searchInput")}
         />
       </div>
-    <div className={s.searchButton}>
-    <CustomContentButton type="submit">Search</CustomContentButton>
-    </div>
-      </form>)
+      <div className={s.searchButton}>
+        <CustomContentButton type="submit">Search</CustomContentButton>
+      </div>
+    </form>)
 }
 
 

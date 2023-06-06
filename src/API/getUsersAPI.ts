@@ -4,7 +4,7 @@ import { axiosInstance } from "./axiosInstance";
 
 
 type GetUsersType = {
-  error: string
+  error: string | null
   items: Array<UserType>
   totalCount: number
 }

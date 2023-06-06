@@ -3,7 +3,6 @@ import s from "./Friend.module.css";
 import defaultAvatar from './../../../../../images/DefaultAvatar/defaultAvatar.png'
 import React from "react";
 
-
 type PropsType = {
   friend: string
 }

@@ -1,16 +1,15 @@
 import mainLogo from "./mainLogo1.png";
 import s from "./Header.module.css";
 import { NavLink } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { logOut} from '../../redux/authReducer';
+import { useSelector } from "react-redux";
+import { logOut } from '../../redux/authReducer';
 import { AppStateType } from '../../redux/redux-store';
 import React from "react";
+import { useAppDispatch } from "../../Hooks/useAppDispatch";
 
-
-
-const Header:React.FC = () => {
+const Header: React.FC = () => {
   const isAuth = useSelector((state: AppStateType) => state.auth.isAuth)
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
 
   const logUserOut = () => {
     dispatch(logOut())

@@ -10,16 +10,15 @@ import { useCallback } from "react";
 import { CustomContentButton } from "../../../UI/CustomContentButton/CustomContentButton";
 import { ProfileType } from '../../../Types/types';
 
-
 type PropsType = {
   profile: ProfileType | null
   isOwner: boolean
   status: string
   savePhoto: (file: File) => void
-  updateUsersStatus: (status:string) => void
+  updateUsersStatus: (status: string) => void
 }
 
-const ProfileInfo:React.FC<PropsType> = (props) => {
+const ProfileInfo: React.FC<PropsType> = (props) => {
   let [isEditMode, setIsEditMode] = useState(false);
 
   const closeModal = useCallback(() => {
@@ -29,7 +28,7 @@ const ProfileInfo:React.FC<PropsType> = (props) => {
   if (!props.profile) {
     return <Preloader />;
   }
-  const onMainPhotoSelected = (event:React.ChangeEvent<HTMLInputElement>) => {
+  const onMainPhotoSelected = (event: React.ChangeEvent<HTMLInputElement>) => {
     const target = event.target;
     const file: null | File = target.files ? target.files[0] : null
     if (file) {
@@ -87,14 +86,13 @@ const ProfileInfo:React.FC<PropsType> = (props) => {
   );
 };
 
-
 type ProfileDataPropsType = {
   profile: ProfileType
   isOwner: boolean
   activateEditMode: () => void
 }
 
-const ProfileData:React.FC<ProfileDataPropsType> = (props) => {
+const ProfileData: React.FC<ProfileDataPropsType> = (props) => {
   return (
     <div className={s.userData}>
       <div>
@@ -129,7 +127,7 @@ type ContactPropsType = {
   contactValue: string
 }
 
-const Contact:React.FC<ContactPropsType> = ({ contactTitle, contactValue }) => {
+const Contact: React.FC<ContactPropsType> = ({ contactTitle, contactValue }) => {
   return (
     <div className={s.contactList}>
       {contactTitle}: {contactValue}

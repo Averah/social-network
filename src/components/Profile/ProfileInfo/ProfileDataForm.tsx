@@ -1,23 +1,21 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import { useDispatch, useSelector } from "react-redux";
-import { saveProfile, showErrorMessages } from "../../../redux/profileReducer";
+import { useSelector } from "react-redux";
+import { saveProfile, actions } from '../../../redux/profileReducer';
 import { CustomContentButton } from "../../../UI/CustomContentButton/CustomContentButton";
 import cn from "classnames";
 import s from "./ProfileInfo.module.css";
 import { ProfileType, ContactType } from '../../../Types/types';
-import { AppStateType, AppDispatch } from '../../../redux/redux-store';
-
+import { AppStateType } from '../../../redux/redux-store';
+import { useAppDispatch } from '../../../Hooks/useAppDispatch';
 
 type PropsType = {
   profile: ProfileType
   deactivateEditMode: () => void
 }
-
 interface UserSubmitHandle extends ProfileType {
   error: null | string[]
 }
-
 
 const ProfileDataForm: React.FC<PropsType> = (props) => {
   const { register, handleSubmit } = useForm<UserSubmitHandle>({
@@ -25,8 +23,8 @@ const ProfileDataForm: React.FC<PropsType> = (props) => {
     defaultValues: props.profile,
   });
 
-  const dispatch: AppDispatch = useDispatch();
-
+  const dispatch = useAppDispatch();
+  
   const onSubmit = async (data: UserSubmitHandle) => {
     const serverResponseMessage = await dispatch(saveProfile(data));
     if (serverResponseMessage === "success") {
@@ -36,12 +34,10 @@ const ProfileDataForm: React.FC<PropsType> = (props) => {
 
   const onCancelClick = () => {
     props.deactivateEditMode();
-    dispatch(showErrorMessages(null));
+    dispatch(actions.showErrorMessages(null));
   };
 
-  let error = useSelector((state: AppStateType) => state.profilePage.errorMessages);
-
-
+  const error = useSelector((state: AppStateType) => state.profilePage.errorMessages);
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={s.userEditingData}>
       <div className={s.formField}>
