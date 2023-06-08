@@ -6,6 +6,7 @@ import { ThunkAction } from 'redux-thunk';
 import { AppStateType, InferActionsTypes } from './redux-store';
 import { ResultCodesEnum } from '../API/authAPI';
 
+
 let initialState = {
     users: [] as Array<UserType>,
     pageSize: 10,
@@ -16,7 +17,7 @@ let initialState = {
     searchData: ''
 }
 
-type InitialState = typeof initialState
+export type InitialState = typeof initialState
 type ActionsTypes = ReturnType<InferActionsTypes<typeof actions>>
 
 export const actions = {
@@ -90,7 +91,7 @@ export const requestUsers = (searchData?: string): ThunkType => async (dispatch,
     dispatch(actions.toggleIsFetching(true));
     let data = await getUsersAPI(currentPage, pageSize, searchData)
     dispatch(actions.setCurrentPage(currentPage))
-    searchData && dispatch(actions.setSearchData(searchData))
+    searchData && dispatch(actions.setSearchData(searchData ))
     dispatch(actions.toggleIsFetching(false));
     dispatch(actions.setUsers(data.items));
     dispatch(actions.setTotalUsersCount(data.totalCount));

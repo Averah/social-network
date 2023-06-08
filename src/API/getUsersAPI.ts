@@ -9,8 +9,8 @@ type GetUsersType = {
   totalCount: number
 }
 
-export const getUsersAPI = async (currentPage:number, pageSize:number, searchData?:string ) => {
-  const response = await axiosInstance.get<GetUsersType>(`users?${searchData ? `term=${searchData}&` : ''}page=${currentPage}&count=${pageSize}`)
+export const getUsersAPI = async (currentPage:number, pageSize:number, searchData?: string) => {
+  const response = await axiosInstance.get<GetUsersType>(`users?page=${currentPage}&count=${pageSize}${searchData ? `&term=${searchData}` : ''}`)
     return response.data;
 };
 

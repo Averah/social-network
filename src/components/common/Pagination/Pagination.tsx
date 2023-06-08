@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import cn from "classnames";
 import s from "./Pagination.module.css";
 import { CustomContentButton } from "../../../UI/CustomContentButton/CustomContentButton";
@@ -11,10 +11,7 @@ type PropsType = {
 }
 const Pagination:React.FC<PropsType> = ({ totalItemsCount, pageSize, currentPage, onPageChanged }) => {
 
-
   let pagesCount = Math.ceil(totalItemsCount / pageSize);
-
-
   let pages:Array<number> = [];
   for (let i = 1; i <= pagesCount; i++) {
     pages.push(i);
@@ -25,6 +22,10 @@ const Pagination:React.FC<PropsType> = ({ totalItemsCount, pageSize, currentPage
   let leftPortionPageNumber = (portionNumber - 1) * portionSize + 1;
   let rightPortionPageNumber = portionNumber * portionSize;
 
+useEffect(() => {
+  setPortionNumber(1)
+}, [totalItemsCount])
+  
   return (
     <div className={s.pagination}>
       {portionNumber > 1 && (

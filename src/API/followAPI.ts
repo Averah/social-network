@@ -2,7 +2,7 @@
 import { axiosInstance } from "./axiosInstance";
 import { ResultCodesEnum } from './authAPI';
 
-type FollowUnfollowType = {
+export type FollowUnfollowType = {
   resultCode: ResultCodesEnum
   messages: string[]
   data: object
@@ -19,6 +19,6 @@ export const followAPI = {
   async unfollowUser(id:number) {
     const response = await  axiosInstance
       .delete<FollowUnfollowType>(`follow/${id}`, {})
-    return response.data
+    return response.data 
   },
 };
