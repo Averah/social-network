@@ -1,6 +1,6 @@
 import React from "react";
-
 import { CustomContentButton } from "../../UI/CustomContentButton/CustomContentButton";
+// @ts-ignore
 import defaultAvatar from "./../../images/DefaultAvatar/defaultAvatar.png";
 import s from "./UserCard.module.css";
 import { UserType } from '../../Types/types';
@@ -8,11 +8,11 @@ import { UserType } from '../../Types/types';
 type PropsType = {
   user: UserType
   followingInProgress: Array<number>
-  follow: (id:number) => void 
-  unfollow: (id:number) => void
+  follow: (id: number) => void
+  unfollow: (id: number) => void
 }
 
-let UserCard:React.FC<PropsType> = ({user, followingInProgress, follow, unfollow}) => {
+let UserCard: React.FC<PropsType> = ({ user, followingInProgress, follow, unfollow }) => {
   return (
     <div key={user.id} className={s.userCard}>
       <div>

@@ -1,6 +1,7 @@
 .pagination {
     padding: 15px;
     font-size: 18px;
+    height: 50px;
 }
 
 .pageNumber {
@@ -28,6 +29,6 @@
 
 .paginationButton {
     margin: 0px 5px;
-
+    font-size: 13px !important;
 }
 

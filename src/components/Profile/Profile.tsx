@@ -1,32 +1,45 @@
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import { withAuthRedirect } from "../HOC/withAuthRedirect";
 import s from "./Profile.module.css";
-import React from 'react'
+import React, { useEffect } from 'react'
 import MyPostsMemorized from './Posts/MyPosts';
-import { ProfileType } from '../../Types/types';
+import { useParams } from "react-router-dom";
+import { useAppDispatch } from "../../Hooks/useAppDispatch";
+import { actions, getUsersProfile, getUsersStatus } from '../../redux/profileReducer';
+import { useSelector } from 'react-redux';
+import { AppStateType } from "../../redux/redux-store";
 
-type PropsType = {
-  profile: ProfileType | null
-  status: string
-  isOwner: boolean
-  updateUsersStatus: (status: string) => void
-  savePhoto: (file: File) => void
-}
+const Profile: React.FC = () => {
+  const params = useParams();
+  const dispatch = useAppDispatch()
 
-const Profile: React.FC<PropsType> = (props) => {
+  const status = useSelector((state: AppStateType) => state.profilePage.status)
+  const profile = useSelector((state: AppStateType) => state.profilePage.profile)
+  const authorizedUserId = useSelector((state: AppStateType) => state.auth.userId)
+
+  useEffect(() => {
+    let userId = params.userId ? +params.userId : null;
+    if (!userId) {
+      userId = authorizedUserId;
+    }
+    dispatch(getUsersProfile(userId));
+    dispatch(getUsersStatus(userId));
+    return () => {
+      dispatch(actions.setUserProfile(null))
+    }
+  }, [params.userId, dispatch, authorizedUserId]);
+
   return (
     <div className={s.profileContent}>
       <div className={s.profileInfo}>
         <ProfileInfo
-          profile={props.profile}
-          status={props.status}
-          updateUsersStatus={props.updateUsersStatus}
-          isOwner={props.isOwner}
-          savePhoto={props.savePhoto}
+          profile={profile}
+          status={status}
+          isOwner={!params.userId}
         />
       </div>
       <div className={s.profilePosts}>
-        <MyPostsMemorized store={props.store} />
+        <MyPostsMemorized />
       </div>
     </div>
   );

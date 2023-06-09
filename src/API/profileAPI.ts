@@ -16,12 +16,12 @@ type SavePhotoDataType = {
 
 
 export const profileAPI = {
-  async getProfile(userId:number) {
+  async getProfile(userId:number | null) {
     const response = await axiosInstance
       .get<ProfileType>(`profile/${userId}`)
       return response.data
   },
-  async getStatus(userId:number) {
+  async getStatus(userId:number | null) {
     const response = await axiosInstance
     .get<string>(`profile/status/${userId}`)
     return response.data

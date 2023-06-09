@@ -2,29 +2,29 @@ import React, { useEffect } from "react";
 import Pagination from "../common/Pagination/Pagination";
 import SearchUsers from "./SearchUsers";
 import UsersList from "./UsersList";
-import s from "./FindUsers.module.css";
+import s from "./Users.module.css";
 import { useSelector } from 'react-redux';
 import { requestUsers, follow, unfollow, actions } from '../../redux/usersReducer';
-import { AppStateType} from '../../redux/redux-store';
+import { AppStateType } from '../../redux/redux-store';
 import { useAppDispatch } from '../../Hooks/useAppDispatch';
 
-const FindUsers:React.FC = () => {
+const Users: React.FC = () => {
   const dispatch = useAppDispatch()
   const usersPage = useSelector((state: AppStateType) => state.usersPage)
 
-  useEffect (() => {
+  useEffect(() => {
     dispatch(requestUsers())
-    },  [dispatch])
+  }, [dispatch])
 
-  const onPageChanged = (pageNumber:number) => {
+  const onPageChanged = (pageNumber: number) => {
     dispatch(actions.setCurrentPage(pageNumber));
-    dispatch(requestUsers(usersPage.searchData))
+    dispatch(requestUsers())
   };
-  const followUser = (id:number) => {
+  const followUser = (id: number) => {
     dispatch(follow(id))
   }
 
-  const unfollowUser = (id:number) => {
+  const unfollowUser = (id: number) => {
     dispatch(unfollow(id))
   }
   return (
@@ -45,4 +45,4 @@ const FindUsers:React.FC = () => {
     </div>
   );
 };
-export default FindUsers;
+export default Users;

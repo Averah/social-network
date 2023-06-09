@@ -27,7 +27,6 @@ let UsersList: React.FC<PropsType> = ({ users, followingInProgress, follow, unfo
         <NavLink to={`/profile/${user.id}`} className={s.userCardLink} key={user.id}>
           <UserCard
             user={user}
-
             followingInProgress={followingInProgress}
             follow={follow}
             unfollow={unfollow}

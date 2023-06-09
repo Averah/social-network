@@ -1,17 +1,19 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
+import { useAppDispatch } from "../../../Hooks/useAppDispatch";
 // @ts-ignore
 import { CustomInput } from "../../../UI/CustomInput/CustomInput";
+import { updateUsersStatus } from '../../../redux/profileReducer';
 
 type PropsType = {
   status: string
   isOwner: boolean
-  updateUsersStatus: (status: string) => void
 }
 
 const ProfileStatus: React.FC<PropsType> = (props) => {
   let [editMode, setEditMode] = useState(false);
   let [status, setStatus] = useState(props.status);
+  const dispatch = useAppDispatch()
 
   useEffect(() => {
     setStatus(props.status);
@@ -25,7 +27,7 @@ const ProfileStatus: React.FC<PropsType> = (props) => {
 
   const deactivateEditMode = () => {
     setEditMode(false);
-    props.updateUsersStatus(status);
+    dispatch(updateUsersStatus(status));
   };
 
   const onStatusChange = (e: React.FormEvent<HTMLInputElement>) => {

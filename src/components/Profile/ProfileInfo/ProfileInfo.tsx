@@ -1,6 +1,7 @@
 import React from "react";
 import Preloader from "../../common/Preloader/Preloader";
 import ProfileStatus from "../ProfileStatus/ProfileStatus";
+// @ts-ignore
 import defaultAvatar from "../../../images/DefaultAvatar/defaultAvatar.png";
 import s from "./ProfileInfo.module.css";
 import ProfileDataForm from "./ProfileDataForm";
@@ -9,18 +10,18 @@ import { Modal } from "../../../UI/Modal/Modal";
 import { useCallback } from "react";
 import { CustomContentButton } from "../../../UI/CustomContentButton/CustomContentButton";
 import { ProfileType } from '../../../Types/types';
+import { useAppDispatch } from "../../../Hooks/useAppDispatch";
+import { savePhoto } from '../../../redux/profileReducer';
 
 type PropsType = {
   profile: ProfileType | null
   isOwner: boolean
   status: string
-  savePhoto: (file: File) => void
-  updateUsersStatus: (status: string) => void
 }
 
 const ProfileInfo: React.FC<PropsType> = (props) => {
   let [isEditMode, setIsEditMode] = useState(false);
-
+  const dispatch = useAppDispatch()
   const closeModal = useCallback(() => {
     setIsEditMode(false);
   }, []);
@@ -32,7 +33,7 @@ const ProfileInfo: React.FC<PropsType> = (props) => {
     const target = event.target;
     const file: null | File = target.files ? target.files[0] : null
     if (file) {
-      props.savePhoto(file);
+      dispatch(savePhoto(file));
     }
   };
 
@@ -66,7 +67,6 @@ const ProfileInfo: React.FC<PropsType> = (props) => {
         <div className={s.userStatus}>
           <ProfileStatus
             status={props.status}
-            updateUsersStatus={props.updateUsersStatus}
             isOwner={props.isOwner}
           />
         </div>

@@ -4,7 +4,7 @@ import { Route, HashRouter, Navigate, Routes } from 'react-router-dom';
 import './App.css';
 import NotFoundPage from './components/404Page/NotFoundPage';
 import Preloader from './components/common/Preloader/Preloader';
-import FindUsers from './components/FindUsers/FindUsers';
+import Users from './components/FindUsers/Users';
 import Friends from './components/Friends/Friends';
 import LoginPage from './components/Login/LoginPage';
 import { initialization } from './redux/appReducer';
@@ -13,7 +13,7 @@ import Header from './components/Header/Header';
 import Navbar from './components/Navbar/Navbar';
 import { useAppDispatch } from './Hooks/useAppDispatch';
 const Dialogs = React.lazy(() => import('./components/Dialogs/Dialogs'));
-const ProfileContainer = React.lazy(() => import('./components/Profile/ProfileContainer'));
+const Profile = React.lazy(() => import('./components/Profile/Profile'));
 
 
 const App:React.FC = () => {
@@ -41,10 +41,10 @@ const App:React.FC = () => {
           <Routes>
             <Route path="/" element={<Navigate to="/profile" />} />
             <Route path="*" element={<NotFoundPage />} />
-            <Route path='/profile/:userId?' element={<ProfileContainer />} />
+            <Route path='/profile/:userId?' element={<Profile />} />
             <Route path='/dialogs/:userId?' element={<Dialogs />} />
             <Route path='/friends' element={<Friends />} />
-            <Route path='/users' element={<FindUsers />} />
+            <Route path='/users' element={<Users />} />
             <Route path='/login' element={<LoginPage />} />
           </Routes>
         </Suspense>

@@ -16,8 +16,7 @@ beforeEach(() => {
         currentPage: 1,
         isFetching: true,
         followingInProgress: [] as Array<number>,
-        filter: {searchData: '',
-    friend: null}
+        filter: {searchData: '', friend: ''}
     }
 })
 

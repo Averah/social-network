@@ -19,7 +19,7 @@ type ActionsTypes = ReturnType<InferActionsTypes<typeof actions>>
 
 export const actions = {
     addPostActionCreator: (postText: string) => ({ type: 'sn/profile/ADD_POST', postText } as const),
-    setUserProfile: (profile: ProfileType) => ({ type: 'sn/profile/SET_USER_PROFILE', profile } as const),
+    setUserProfile: (profile: ProfileType | null) => ({ type: 'sn/profile/SET_USER_PROFILE', profile } as const),
     setUserStatus: (status: string) => ({ type: 'sn/profile/SET_USER_STATUS', status } as const),
     deletePost: (postId: number) => ({ type: 'sn/profile/DELETE_POST', postId } as const),
     savePhotoSuccess: (photos: PhotosType) => ({ type: 'sn/profile/SAVE_PHOTO_SUCCESS', photos } as const),
@@ -67,13 +67,13 @@ export const profileReducer = (state = initialState, action: ActionsTypes): Init
 
 export type ThunkType<T = void> = ThunkAction<Promise<T>, AppStateType, unknown, ActionsTypes>
 
-export const getUsersProfile = (userId: number): ThunkType => async (dispatch) => {
+export const getUsersProfile = (userId: number | null): ThunkType => async (dispatch) => {
     let data = await profileAPI.getProfile(userId)
     dispatch(actions.setUserProfile(data));
 }
 
 
-export const getUsersStatus = (userId: number): ThunkType => async (dispatch) => {
+export const getUsersStatus = (userId: number | null): ThunkType => async (dispatch) => {
     let data = await profileAPI.getStatus(userId)
     dispatch(actions.setUserStatus(data))
 }

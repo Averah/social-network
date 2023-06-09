@@ -7,6 +7,11 @@ import { AppStateType, InferActionsTypes } from './redux-store';
 import { ResultCodesEnum } from '../API/authAPI';
 
 
+export type FilterType = {
+    searchData: string
+    friend: string
+}
+
 let initialState = {
     users: [] as Array<UserType>,
     pageSize: 10,
@@ -14,7 +19,7 @@ let initialState = {
     currentPage: 1,
     isFetching: true,
     followingInProgress: [] as Array<number>,
-    searchData: ''
+    filter: {searchData: '', friend: ''} as FilterType
 }
 
 export type InitialState = typeof initialState
@@ -29,7 +34,7 @@ export const actions = {
     toggleIsFetching: (isFetching: boolean) => ({ type: 'sn/users/TOGGLE_IS_FETCHING', isFetching } as const),
     toggleFollowingProgress: (isFetching: boolean, userId: number) =>
         ({ type: 'sn/users/TOGGLE_IS_FOLLOWING_PROGRESS', isFetching, userId } as const),
-    setSearchData: (searchData: string) => ({ type: 'sn/users/SET_SEARCH_DATA', searchData } as const),
+    setFilterData: (filter: FilterType) => ({ type: 'sn/users/SET_FILTER_DATA', filter } as const),
 }
 
 export const usersReducer = (state = initialState, action: ActionsTypes): InitialState => {
@@ -74,8 +79,8 @@ export const usersReducer = (state = initialState, action: ActionsTypes): Initia
                     : state.followingInProgress.filter(id => id !== action.userId)
             }
         }
-        case 'sn/users/SET_SEARCH_DATA': {
-            return { ...state, searchData: action.searchData }
+        case 'sn/users/SET_FILTER_DATA': {
+            return { ...state, filter: action.filter }
         }
 
         default:
@@ -85,13 +90,13 @@ export const usersReducer = (state = initialState, action: ActionsTypes): Initia
 
 type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ActionsTypes>
 
-export const requestUsers = (searchData?: string): ThunkType => async (dispatch, getState) => {
+export const requestUsers = (): ThunkType => async (dispatch, getState) => {
     const currentPage = getState().usersPage.currentPage
     const pageSize = getState().usersPage.pageSize
+    const filter =getState().usersPage.filter
     dispatch(actions.toggleIsFetching(true));
-    let data = await getUsersAPI(currentPage, pageSize, searchData)
+    let data = await getUsersAPI(currentPage, pageSize, filter?.searchData, filter?.friend)
     dispatch(actions.setCurrentPage(currentPage))
-    searchData && dispatch(actions.setSearchData(searchData ))
     dispatch(actions.toggleIsFetching(false));
     dispatch(actions.setUsers(data.items));
     dispatch(actions.setTotalUsersCount(data.totalCount));
