@@ -22,10 +22,10 @@ const Pagination:React.FC<PropsType> = ({ totalItemsCount, pageSize, currentPage
   let leftPortionPageNumber = (portionNumber - 1) * portionSize + 1;
   let rightPortionPageNumber = portionNumber * portionSize;
 
-useEffect(() => {
-  setPortionNumber(1)
-}, [totalItemsCount])
-  
+  useEffect(() => {
+    setPortionNumber(1)
+  }, [totalItemsCount])
+
   return (
     <div className={s.pagination}>
       {portionNumber > 1 && (

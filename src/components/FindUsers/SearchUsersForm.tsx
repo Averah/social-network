@@ -13,7 +13,7 @@ type UserSubmitForm = {
   searchData: string
   friend: string
 }
-const SearchUsers: React.FC = () => {
+const SearchUsers: React.FC = React.memo(() => {
 
   const filterData = useSelector((state: AppStateType) => state.usersPage.filter)
   const dispatch = useAppDispatch()
@@ -44,7 +44,7 @@ const SearchUsers: React.FC = () => {
   }, [filterData.friend, filterData.searchData, setValue])
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className={s.searchUsersForm}>
+    <form autoComplete="off" onSubmit={handleSubmit(onSubmit)} className={s.searchUsersForm}>
       <div className={s.formField}>
         <CustomInput
           type="text"
@@ -67,6 +67,6 @@ const SearchUsers: React.FC = () => {
           onClick={onResetClick}>Reset</CustomContentButton>
       </div>
     </form>)
-}
+})
 
 export default SearchUsers;

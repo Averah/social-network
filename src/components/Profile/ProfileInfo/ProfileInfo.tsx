@@ -1,7 +1,6 @@
 import React from "react";
 import Preloader from "../../common/Preloader/Preloader";
 import ProfileStatus from "../ProfileStatus/ProfileStatus";
-// @ts-ignore
 import defaultAvatar from "../../../images/DefaultAvatar/defaultAvatar.png";
 import s from "./ProfileInfo.module.css";
 import ProfileDataForm from "./ProfileDataForm";

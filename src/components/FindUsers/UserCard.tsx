@@ -1,6 +1,5 @@
 import React from "react";
 import { CustomContentButton } from "../../UI/CustomContentButton/CustomContentButton";
-// @ts-ignore
 import defaultAvatar from "./../../images/DefaultAvatar/defaultAvatar.png";
 import s from "./UserCard.module.css";
 import { UserType } from '../../Types/types';

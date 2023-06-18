@@ -1,4 +1,3 @@
-// @ts-ignore
 import defaultAvatar from "../../../../images/DefaultAvatar/defaultAvatar.png";
 import s from "./Post.module.css";
 import React from 'react'

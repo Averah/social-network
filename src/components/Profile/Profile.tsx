@@ -24,10 +24,13 @@ const Profile: React.FC = () => {
     }
     dispatch(getUsersProfile(userId));
     dispatch(getUsersStatus(userId));
+  }, [params.userId, dispatch, authorizedUserId]);
+
+  useEffect(() => {
     return () => {
       dispatch(actions.setUserProfile(null))
     }
-  }, [params.userId, dispatch, authorizedUserId]);
+  }, [dispatch])
 
   return (
     <div className={s.profileContent}>

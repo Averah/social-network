@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import s from "./Dialogs.module.css";
 import DialogsItem from "./DialogsItem/DialogsItem";
@@ -6,6 +6,7 @@ import Message from "./Message/Message";
 import MessageForm from "./Message/MessageForm";
 import { withAuthRedirect } from "../HOC/withAuthRedirect";
 import { AppStateType } from '../../redux/redux-store';
+
 
 const Dialogs: React.FC = () => {
   const dialogs = useSelector((state: AppStateType) => state.dialogsPage.dialogs)
