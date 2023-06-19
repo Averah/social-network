@@ -7,6 +7,7 @@ import { sidebarReducer } from "./sidebarReducer";
 import { usersReducer } from './usersReducer';
 import thunk, { ThunkDispatch } from "redux-thunk"
 import { appReducer, } from './appReducer';
+import { chatReducer } from './chatReducer';
 
 
 let rootReducer = combineReducers({
@@ -16,6 +17,7 @@ let rootReducer = combineReducers({
     usersPage: usersReducer,
     auth: authReducer,
     app: appReducer,
+    chat: chatReducer
 })
 
 type RootReducerType = typeof rootReducer

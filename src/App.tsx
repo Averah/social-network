@@ -4,7 +4,7 @@ import { Route, HashRouter, Navigate, Routes } from 'react-router-dom';
 import './App.css';
 import NotFoundPage from './components/404Page/NotFoundPage';
 import Preloader from './components/common/Preloader/Preloader';
-import Users from './components/FindUsers/Users';
+import Users from './components/Users/Users';
 import Friends from './components/Friends/Friends';
 import LoginPage from './components/Login/LoginPage';
 import { initialization } from './redux/appReducer';
@@ -12,6 +12,7 @@ import store, { AppStateType } from './redux/redux-store';
 import Header from './components/Header/Header';
 import Navbar from './components/Navbar/Navbar';
 import { useAppDispatch } from './Hooks/useAppDispatch';
+import { ChatPage } from './components/Chat/ChatPage';
 const Dialogs = React.lazy(() => import('./components/Dialogs/Dialogs'));
 const Profile = React.lazy(() => import('./components/Profile/Profile'));
 
@@ -36,6 +37,7 @@ const App:React.FC = () => {
       <div className='navigation'>
         <Navbar />
       </div>
+
       <div className='content'>
         <Suspense fallback={<Preloader />}>
           <Routes>
@@ -48,6 +50,9 @@ const App:React.FC = () => {
             <Route path='/login' element={<LoginPage />} />
           </Routes>
         </Suspense>
+        <div className='chatPage'>
+      <ChatPage />
+      </div>
         </div>
       </div>
     </div>
