@@ -7,20 +7,23 @@ import { CustomContentButton } from '../../UI/CustomContentButton/CustomContentB
 type PropsType = {
   closeChat: () => void
   sendMessage: (message: string) => void
+  buttonDisabled: boolean
 }
 
 type UserSubmitForm = {
   message: string
 }
 
-export const ChatForm: React.FC<PropsType> = React.memo(({ closeChat, sendMessage }) => {
+export const ChatForm: React.FC<PropsType> = React.memo(({ closeChat, sendMessage, buttonDisabled }) => {
   const {
     register,
     handleSubmit,
+    reset
   } = useForm<UserSubmitForm>({ mode: "onChange" });
 
   const onSubmit = (data: UserSubmitForm) => {
     sendMessage(data.message)
+    reset()
   };
   const onClose = () => closeChat()
 
@@ -35,7 +38,7 @@ export const ChatForm: React.FC<PropsType> = React.memo(({ closeChat, sendMessag
         />
       </div>
       <div className={s.formButtons}>
-        <CustomContentButton type='submit'>Send message</CustomContentButton>
+        <CustomContentButton type='submit' disabled={buttonDisabled}>Send message</CustomContentButton>
         <CustomContentButton type="button" onClick={onClose}>Close chat</CustomContentButton>
       </div>
     </form>

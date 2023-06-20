@@ -2,11 +2,13 @@
     display: flex;
     flex-direction: column;
     margin: 0 auto;
+
 }
 
 .chatMessages {
     height: 400px;
     overflow-y: auto;
+    background-color: #F0F0F0
 }
 
 .formButtons {
@@ -18,7 +20,33 @@
     margin-top: 5px;
 }
 
+.chatMessage {
+    display: flex;
+    flex-wrap:wrap;
+    padding: 5px 5px 10px 5px;
+    border-bottom: 1px solid #ccc;
+}
+
 .avatar {
-    width: 30px;
+    flex-basis:20%;
+    max-width: 30px;
     border-radius: 50%
+}
+.userName {
+    flex-basis:80%;
+    align-self: center;
+    padding-left: 1px;
+    font-weight: bolder;
+    text-decoration: none;
+    color: black;
+    transition-duration: 0.4s;
+}
+
+.userName:hover {
+    color: #24d6d6;
+}
+
+.message {
+    flex-basis:100%;
+
 }

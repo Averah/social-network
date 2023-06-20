@@ -1,5 +1,4 @@
 import React, { useCallback, useState } from 'react'
-import s from './Chat.module.css'
 import { CustomContentButton } from '../../UI/CustomContentButton/CustomContentButton';
 import { Chat } from './Chat';
 
